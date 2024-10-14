@@ -1,6 +1,5 @@
 <?php
 require_once("./persistencia/Conexion.php");
-require("./persistencia/ProductoDAO.php");
 
 class EventoDAO
 {
@@ -26,7 +25,7 @@ class EventoDAO
     }
 
     public function consultarTodos(){
-        return "select idEvento, nombre, aforo, ciudad, direccion, fecha, hora, descripcion, Categoria_idCategoria
+        return "select idEvento, nombre, aforo, ciudad, direccion, fecha, hora, descripcion, Tipo_evento_idCategoria
                 from Evento";
     }
 

@@ -1,5 +1,5 @@
 <?php
-
+require ("logica/Evento.php");
 require ("logica/Categoria.php");
 
 
@@ -52,6 +52,49 @@ require ("logica/Categoria.php");
             </div>
         </div>
     </nav>
+
+    <div class="container">
+		<div class="row mb-3">
+			<div class="col">
+				<div class="card border-primary">
+					<div class="card-header text-bg-info">
+						<h4>Eventos</h4>
+					</div>
+					<div class="card-body">
+    					<?php
+                        $i = 0;
+                        $evento = new Evento();
+                        $eventos = $evento->consultarTodos();
+                        foreach ($eventos as $eventoActual) {
+                            if ($i % 4 == 0) {
+                                echo "<div class='row mb-3'>";
+                            }
+                            echo "<div class='col-lg-3 col-md-4 col-sm-6' >";
+                            echo "<div class='card text-bg-light'>";
+                            echo "<div class='card-body'>";
+                            echo "<div class='text-center'><img src='https://icons.iconarchive.com/icons/icons8/ios7/256/Time-And-Date-Meeting-icon.png' width='70%' /></div>";
+                            echo "<a href='#'>" . $eventoActual->getNombre() . "</a><br>";
+                            echo "Descripcion: " . $eventoActual->getDescripcion() . "<br>";
+                            echo "Ciudad: " . $eventoActual->getCiudad() . "<br>";
+                            echo "Categoria: " . $eventoActual->getCategoria()->getNombre() . "<br>";
+                            echo "</div>";
+                            echo "</div>";
+                            echo "</div>";
+                
+                            if ($i % 4 == 3) {
+                                echo "</div>";
+                            }
+                            $i ++;
+                        }
+                        if ($i % 4 != 0) {
+                            echo "</div>";
+                        }
+                        ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 </body>
