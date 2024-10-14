@@ -70,12 +70,13 @@ class Persona
         $this->clave = $clave;
     }
 
-    public function __construct($idPersona=0, $nombre="", $correo="", $telefono=0, $clave="")
+    public function __construct($idPersona=0, $nombre="", $correo="", $telefono=0, $direccion="", $clave="")
     {
         $this -> idPersona = $idPersona;
         $this -> nombre = $nombre;
         $this -> correo = $correo;
         $this -> telefono = $telefono;
+        $this -> direccion = $direccion;
         $this -> clave = $clave;
     }
 }
