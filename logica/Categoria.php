@@ -1,5 +1,6 @@
 <?php
-
+require_once ("./persistencia/Conexion.php");
+require ("./persistencia/CategoriaDAO.php");
 class Categoria
 {
     private $idCategoria;
@@ -28,4 +29,28 @@ class Categoria
         $this->idCategoria = $idCategoria;
         $this->nombre = $nombre;
     }
+
+    public function consultarTodos(){
+        $categorias = array();
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $categoriaDAO = new CategoriaDAO();
+        $conexion -> ejecutarConsulta($categoriaDAO -> consultarTodos());
+        while($registro = $conexion -> siguienteRegistro()){
+            $categoria = new Categoria($registro[0], $registro[1]);
+            array_push($categorias, $categoria);
+        }
+        $conexion -> cerrarConexion();
+        return $categorias;        
+    }
+        
+    public function consultar(){
+        $conexion = new Conexion();
+        $conexion -> abrirConexion();
+        $categoriaDAO = new CategoriaDAO($this -> idCategoria);
+        $conexion -> ejecutarConsulta($categoriaDAO -> consultar());
+        $registro = $conexion -> siguienteRegistro();
+        $this -> nombre = $registro[0];
+        $conexion -> cerrarConexion();
+    } 
 }

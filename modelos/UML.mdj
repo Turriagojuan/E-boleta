@@ -892,7 +892,7 @@
 											"top": 510,
 											"width": 141.5498046875,
 											"height": 13,
-											"text": "+idBoleta: int",
+											"text": "-idBoleta: int",
 											"horizontalAlignment": 0
 										},
 										{
@@ -909,7 +909,7 @@
 											"top": 525,
 											"width": 141.5498046875,
 											"height": 13,
-											"text": "+nombre_usuario: string",
+											"text": "-nombre_usuario: string",
 											"horizontalAlignment": 0
 										}
 									],
@@ -6562,6 +6562,7 @@
 								"$ref": "AAAAAAGShy6anEPC6Cs="
 							},
 							"name": "idBoleta",
+							"visibility": "private",
 							"type": "int"
 						},
 						{
@@ -6571,6 +6572,7 @@
 								"$ref": "AAAAAAGShy6anEPC6Cs="
 							},
 							"name": "nombre_usuario",
+							"visibility": "private",
 							"type": "string"
 						}
 					]
