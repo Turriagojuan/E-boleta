@@ -1,6 +1,6 @@
 <?php
 require_once("./persistencia/Conexion.php");
-require("./persistencia/ProductoDAO.php");
+require("./persistencia/EventoDAO.php");
 
 class Evento
 {
@@ -124,14 +124,14 @@ class Evento
         $conexion -> ejecutarConsulta($eventoDAO -> consultarTodos());
         while($registro = $conexion -> siguienteRegistro()){
             $marca = null;
-            if(array_key_exists($registro[9], $categorias)){
-                $categoria = $categorias[$registro[9]];
+            if(array_key_exists($registro[8], $categorias)){
+                $categoria = $categorias[$registro[8]];
             }else{
-                $categoria = new Categoria($registro[9]);
+                $categoria = new Categoria($registro[8]);
                 $categoria -> consultar();
-                $categorias[$registro[9]] = $categoria;
+                $categorias[$registro[8]] = $categoria;
             }
-            $evento = new Evento($registro[0], $registro[1], $registro[2], $registro[3], $registro[4],$registro[5],$registro[6],$registro[7],$registro[8],$marca);
+            $evento = new Evento($registro[0], $registro[1], $registro[2], $registro[3], $registro[4],$registro[5],$registro[6],$registro[7],$categoria);
             array_push($eventos, $evento);
         }
         $conexion -> cerrarConexion();
