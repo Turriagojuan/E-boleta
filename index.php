@@ -1,7 +1,7 @@
 <?php
-//require ("logica/Producto.php");
+
 require ("logica/Categoria.php");
-//require ("logica/Marca.php");
+
 
 
 ?>

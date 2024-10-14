@@ -26,8 +26,8 @@ class EventoDAO
     }
 
     public function consultarTodos(){
-        return "select idEvento, nombre, aforo, ciudad, direccion, fecha, hora, descripcion, id_marca
+        return "select idEvento, nombre, aforo, ciudad, direccion, fecha, hora, descripcion, Categoria_idCategoria
                 from Evento";
     }
-    
+
 }
