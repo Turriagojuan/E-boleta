@@ -1,5 +1,6 @@
 <?php
-
+require_once("./persistencia/Conexion.php");
+require_once("./persistencia/SectorDAO.php");
 class Sector{
     private $idSector;
     private $nombre;
@@ -41,4 +42,19 @@ class Sector{
         $this -> precio = $precio;
         $this -> cantidad = $cantidad;
        }
+
+    // Método para consultar sectores por evento
+    public function consultarPorEvento($idEvento){
+        $sectores = array();
+        $conexion = new Conexion();
+        $conexion->abrirConexion();
+        $sectorDAO = new SectorDAO();
+        $conexion->ejecutarConsulta($sectorDAO->consultarPorEvento($idEvento));
+        while ($registro = $conexion->siguienteRegistro()) {
+            $sector = new Sector($registro[0], $registro[1], $registro[2], $registro[3]);
+            array_push($sectores, $sector);
+        }
+        $conexion->cerrarConexion();
+        return $sectores;
+    }
 }
