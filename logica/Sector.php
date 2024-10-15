@@ -46,12 +46,12 @@ class Sector{
     // Método para consultar sectores por evento
     public function consultarPorEvento($idEvento){
         $sectores = array();
-        $conexion = new Conexion();
+        $conexion = new Conexion(); 
         $conexion->abrirConexion();
         $sectorDAO = new SectorDAO();
         $conexion->ejecutarConsulta($sectorDAO->consultarPorEvento($idEvento));
         while ($registro = $conexion->siguienteRegistro()) {
-            $sector = new Sector($registro[0], $registro[1], $registro[2], $registro[3]);
+            $sector = new Sector($registro[0], $registro[1], $registro[2]);
             array_push($sectores, $sector);
         }
         $conexion->cerrarConexion();
