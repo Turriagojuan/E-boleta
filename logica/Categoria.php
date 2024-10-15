@@ -53,4 +53,5 @@ class Categoria
         $this -> nombre = $registro[0];
         $conexion -> cerrarConexion();
     } 
+
 }
