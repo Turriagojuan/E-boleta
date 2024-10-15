@@ -123,7 +123,6 @@ class Evento
         $eventoDAO = new EventoDAO();
         $conexion -> ejecutarConsulta($eventoDAO -> consultarTodos());
         while($registro = $conexion -> siguienteRegistro()){
-            $marca = null;
             if(array_key_exists($registro[8], $categorias)){
                 $categoria = $categorias[$registro[8]];
             }else{

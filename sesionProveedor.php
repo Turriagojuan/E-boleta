@@ -35,7 +35,7 @@ $proveedor -> consultar();
 						href="#" role="button" data-bs-toggle="dropdown"
 						aria-expanded="false">Evento</a>
 						<ul class="dropdown-menu">
-                            <li><a class='dropdown-item' href='#'>Nuevo Evento</a></li>
+                            <li><a class='dropdown-item' href='agregarEvento.php'>Nuevo Evento</a></li>
 						</ul></li>
 				</ul>
 				<ul class="navbar-nav">

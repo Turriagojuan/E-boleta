@@ -1,6 +1,9 @@
 <?php
 require_once ("./persistencia/Conexion.php");
-require ("./persistencia/ProveedorDAO.php");
+require_once ("./logica/Persona.php");
+require_once ("./persistencia/ProveedorDAO.php");
+require_once("./logica/Categoria.php");
+
 class Proveedor extends Persona
 {
     private $eventos;
@@ -14,9 +17,9 @@ class Proveedor extends Persona
     {
         $this->eventos = $eventos;
     }
-    public function __construct($idPersona=0, $nombre="", $correo="", $telefono=0, $direccion="", $clave="")
+    public function __construct($idPersona=0, $nombre="", $correo="", $telefono=0, $direccion="", $clave="",$eventos=null)
     {
-       parent::__construct($idPersona, $nombre, $correo, $telefono, $direccion, $clave);
+       parent::__construct($idPersona, $nombre, $correo, $telefono, $direccion, $clave,$eventos);
     }
 
     public function autenticar(){
@@ -44,5 +47,14 @@ class Proveedor extends Persona
         $this -> correo = $registro[1];
         $conexion -> cerrarConexion();
     }
+    public function agregarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $idCategoria){
+        $conexion = new Conexion();
+        $conexion->abrirConexion();
+        $proveedorDAO = new ProveedorDAO($this->idPersona);
+        $consulta = $proveedorDAO->agregarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $idCategoria);
+        $conexion->ejecutarConsulta($consulta);
+        $conexion->cerrarConexion();
+    }
+    
 
 }
