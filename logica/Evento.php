@@ -136,4 +136,23 @@ class Evento
         $conexion -> cerrarConexion();
         return $eventos;        
     }
+
+    // Método para consultar un evento por idEvento
+    public function consultar(){
+        $conexion = new Conexion();
+        $conexion->abrirConexion();
+        $eventoDAO = new EventoDAO($this->idEvento);
+        $conexion->ejecutarConsulta($eventoDAO->consultarPorId());
+        $registro = $conexion->siguienteRegistro();
+        if ($registro != null) {
+            $this->nombre = $registro[1];
+            $this->aforo = $registro[2];
+            $this->ciudad = $registro[3];
+            $this->direccion = $registro[4];
+            $this->fecha = $registro[5];
+            $this->hora = $registro[6];
+            $this->descripcion = $registro[7];
+        }
+        $conexion->cerrarConexion();
+    }
 }
