@@ -12,24 +12,9 @@ $idProveedor = $_SESSION['id'];
 $proveedor = new Proveedor($idProveedor);
 
 
-
-/**
- * Procesa el evento y lo agrega a la base de datos.
- *
- * @param string $nombre El nombre del evento.
- * @param int $aforo El aforo del evento.
- * @param string $ciudad La ciudad donde se realizará el evento.
- * @param string $direccion La dirección del evento.
- * @param string $fecha La fecha del evento.
- * @param string $hora La hora del evento.
- * @param string $descripcion Una breve descripción del evento.
- * @param int $idCategoria La categoría del evento (llave foránea).
- * @param Proveedor $proveedor El objeto Proveedor que agrega el evento.
- * @return bool Retorna true si el evento fue procesado correctamente, false si ocurrió un error.
- */
-function procesarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $idCategoria, $proveedor) {
+function procesarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion,$precio, $idCategoria, $proveedor) {
     // Validar que los campos requeridos no estén vacíos
-    if (empty($nombre) || empty($aforo) || empty($ciudad) || empty($direccion) || empty($fecha) || empty($hora) || empty($idCategoria)) {
+    if (empty($nombre) || empty($aforo) || empty($ciudad) || empty($direccion) || empty($fecha) || empty($hora) || empty($idCategoria) || empty($precio)) {
         return false; // Algún campo requerido está vacío
     }
 
@@ -41,7 +26,7 @@ function procesarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $de
     // Si todo es válido, agregar el evento
     try {
         // Llama al método agregarEvento del proveedor
-        $proveedor->agregarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $idCategoria);
+        $proveedor->agregarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion,$precio, $idCategoria);
         return true; // El evento fue agregado exitosamente
     } catch (Exception $e) {
         // Manejo de errores (podrías logear el error para depuración)
@@ -58,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fecha = $_POST['fecha'];
     $hora = $_POST['hora'];
     $descripcion = $_POST['descripcion'];
+    $precio = $_POST['precio'];
     $idCategoria = $_POST['idCategoria'];
 
     echo "<pre>";
@@ -68,11 +54,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "Fecha: " . htmlspecialchars($fecha) . "\n";
     echo "Hora: " . htmlspecialchars($hora) . "\n";
     echo "Descripción: " . htmlspecialchars($descripcion) . "\n";
+    echo "precio: " . htmlspecialchars($precio) . "\n";
     echo "ID Categoría: " . htmlspecialchars($idCategoria) . "\n";
     echo "</pre>";
     
+
     // Llamada al método procesarEvento para manejar la lógica
-    if (procesarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $idCategoria, $proveedor)) {
+    if (procesarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $precio, $idCategoria, $proveedor)) {
         // Si el evento fue agregado exitosamente, redirigir con mensaje de éxito
         header('Location: sesionProveedor.php?mensaje=eventoAgregado');
     } else {

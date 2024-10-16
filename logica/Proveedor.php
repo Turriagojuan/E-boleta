@@ -47,11 +47,11 @@ class Proveedor extends Persona
         $this -> correo = $registro[1];
         $conexion -> cerrarConexion();
     }
-    public function agregarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $idCategoria){
+    public function agregarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion,$precio, $idCategoria){
         $conexion = new Conexion();
         $conexion->abrirConexion();
         $proveedorDAO = new ProveedorDAO($this->idPersona);
-        $consulta = $proveedorDAO->agregarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $idCategoria);
+        $consulta = $proveedorDAO->agregarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion,$precio, $idCategoria);
         $conexion->ejecutarConsulta($consulta);
         $conexion->cerrarConexion();
     }

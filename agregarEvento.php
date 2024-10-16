@@ -16,6 +16,7 @@ $proveedor -> consultar();
 </head>
 <body>
 <?php include("encabezado.php"); ?>
+
     <div class="container mt-5">
         <h2>Agregar Nuevo Evento</h2>
         <form action="agregar.php" method="POST">
@@ -48,6 +49,10 @@ $proveedor -> consultar();
                 <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
             </div>
             <div class="mb-3">
+                <label for="precio" class="form-label">Precio</label>
+                <input type="number" class="form-control" id="precio" name="precio" step="0.01" required>
+            </div>
+            <div class="mb-3">
             <label for="categoria">Categoría:</label>
     <select id="categoria" name="idCategoria" required>
         <?php
@@ -66,3 +71,6 @@ $proveedor -> consultar();
     </div>
 </body>
 </html>
+
+
+

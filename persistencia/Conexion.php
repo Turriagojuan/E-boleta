@@ -9,7 +9,7 @@ class Conexion{
     }
     
     public function ejecutarConsulta($sentenciaSQL){
-        $this -> resultado = $this -> mysqlConexion -> query($sentenciaSQL);
+        return $this -> resultado = $this -> mysqlConexion -> query($sentenciaSQL);
     }
     
     public function siguienteRegistro(){
