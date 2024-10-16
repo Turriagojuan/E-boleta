@@ -58,7 +58,6 @@ $proveedor -> consultar();
 					</div>
 					<div class="card-body">
 						<p>Bienvenido <?php echo $proveedor -> getNombre() ?></p>
-
 					</div>
 				</div>
 			</div>
