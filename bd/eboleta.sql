@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-10-2024 a las 16:33:42
+-- Tiempo de generación: 15-10-2024 a las 23:59:35
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `eboleta`
 --
+CREATE DATABASE IF NOT EXISTS `eboleta` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `eboleta`;
 
 -- --------------------------------------------------------
 
@@ -82,8 +84,8 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`idCliente`, `nombre`, `correo`, `telefono`, `direccion`, `clave`) VALUES
-(1, 'Juan Pérez', 'juan.perez@gmail.com', 321654987, 'Carrera 10 #45-78', 'clavejuan'),
-(2, 'Ana Gómez', 'ana.gomez@gmail.com', 987321654, 'Calle 22 #33-44', 'claveana');
+(1, 'Juan Pérez', 'juan.perez@gmail.com', 321654987, 'Carrera 10 #45-78', '56e044c0ec3f8ce92fdab721f26aea0a'),
+(2, 'Ana Gómez', 'ana.gomez@gmail.com', 987321654, 'Calle 22 #33-44', 'a93b0d88486eb6677b3934e389bc7c81');
 
 -- --------------------------------------------------------
 
@@ -110,7 +112,8 @@ CREATE TABLE `evento` (
 
 INSERT INTO `evento` (`idEvento`, `nombre`, `aforo`, `ciudad`, `direccion`, `fecha`, `hora`, `descripcion`, `Proveedor_idProveedor`, `Tipo_evento_idCategoria`) VALUES
 (1, 'Concierto Rock', 5000, 'Bogotá', 'Estadio XYZ', '2024-11-01', '19:00:00', 'Un concierto de rock con bandas nacionales.', 1, 1),
-(2, 'Obra de Teatro', 300, 'Medellín', 'Teatro ABC', '2024-12-05', '20:00:00', 'Una obra de teatro clásica.', 2, 2);
+(2, 'Obra de Teatro', 300, 'Medellín', 'Teatro ABC', '2024-12-05', '20:00:00', 'Una obra de teatro clásica.', 2, 2),
+(10, 'Bogotafes', 500, 'Medellin', 'calle de la muelte #4', '2024-10-16', '14:33:00', 'jkbnkjn jknknk kjnk', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -177,8 +180,8 @@ CREATE TABLE `proveedor` (
 --
 
 INSERT INTO `proveedor` (`idProveedor`, `nombre`, `correo`, `telefono`, `direccion`, `clave`) VALUES
-(1, 'Proveedor 1', 'contacto@proveedor1.com', 123456789, 'Calle 123', 'clave123'),
-(2, 'Proveedor 2', 'contacto@proveedor2.com', 987654321, 'Avenida 456', 'clave456');
+(1, 'Proveedor 1', 'contacto@proveedor1.com', 123456789, 'Calle 123', 'eb52fc9a4b3a81a2000a9e774d5aa515'),
+(2, 'Proveedor 2', 'contacto@proveedor2.com', 987654321, 'Avenida 456', 'b984fe77863037ddeb9be2ad7dfb246e');
 
 -- --------------------------------------------------------
 
@@ -210,18 +213,17 @@ INSERT INTO `sector` (`idSector`, `nombre`, `precio`, `cantidad`) VALUES
 
 CREATE TABLE `sector_evento` (
   `Sector_idSector` int(11) NOT NULL,
-  `Evento_idEvento` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL
+  `Evento_idEvento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `sector_evento`
 --
 
-INSERT INTO `sector_evento` (`Sector_idSector`, `Evento_idEvento`, `cantidad`) VALUES
-(1, 1, 50),
-(2, 1, 300),
-(3, 2, 100);
+INSERT INTO `sector_evento` (`Sector_idSector`, `Evento_idEvento`) VALUES
+(1, 1),
+(2, 1),
+(3, 2);
 
 --
 -- Índices para tablas volcadas
@@ -288,6 +290,16 @@ ALTER TABLE `sector`
 ALTER TABLE `sector_evento`
   ADD PRIMARY KEY (`Sector_idSector`,`Evento_idEvento`),
   ADD KEY `fk_Sector_has_Evento_Evento1` (`Evento_idEvento`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `evento`
+--
+ALTER TABLE `evento`
+  MODIFY `idEvento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas

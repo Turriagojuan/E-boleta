@@ -25,13 +25,13 @@ class EventoDAO
     }
 
     public function consultarTodos(){
-        return "select idEvento, nombre, aforo, ciudad, direccion, fecha, hora, descripcion, Tipo_evento_idCategoria
+        return "select idEvento, nombre, aforo, ciudad, direccion, fecha, hora, descripcion, Tipo_evento_idCategoria, precio
                 from Evento";
     }
 
     // Método para consultar un evento por su ID
     public function consultarPorId(){
-        return "SELECT idEvento, nombre, aforo, ciudad, direccion, fecha, hora, descripcion, Tipo_evento_idCategoria FROM Evento WHERE idEvento = " . $this->idEvento;
+        return "SELECT idEvento, nombre, aforo, ciudad, direccion, fecha, hora, descripcion, Tipo_evento_idCategoria, precio FROM Evento WHERE idEvento = " . $this->idEvento;
     }
 
 }

@@ -1,6 +1,5 @@
 <?php
-require ("logica/Evento.php");
-require ("logica/Sector.php");
+require("logica/Evento.php");
 
 // Obtener el idEvento de la URL
 $idEvento = $_GET['idEvento'];
@@ -9,9 +8,6 @@ $idEvento = $_GET['idEvento'];
 $evento = new Evento($idEvento);
 $evento->consultar();
 
-// Consultar los sectores disponibles para el evento
-$sector = new Sector();
-$sectores = $sector->consultarPorEvento($idEvento);
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +19,22 @@ $sectores = $sector->consultarPorEvento($idEvento);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle del Evento</title>
+    <script>
+        // Función para generar campos de nombres según la cantidad de boletas seleccionadas
+        function generarCamposNombres() {
+            let cantidad = document.getElementById('cantidad').value;
+            let contenedorNombres = document.getElementById('contenedorNombres');
+            contenedorNombres.innerHTML = ""; // Limpiar campos previos
+
+            for (let i = 1; i <= cantidad; i++) {
+                let campo = `<div class="mb-3">
+                                <label for="nombreUsuario${i}" class="form-label">Nombre del Usuario ${i}</label>
+                                <input type="text" name="nombresUsuarios[]" id="nombreUsuario${i}" class="form-control" required>
+                             </div>`;
+                contenedorNombres.innerHTML += campo;
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -38,25 +50,19 @@ $sectores = $sector->consultarPorEvento($idEvento);
                     <div class="card-body">
                         <p><strong>Descripción:</strong> <?php echo $evento->getDescripcion(); ?></p>
                         <p><strong>Ciudad:</strong> <?php echo $evento->getCiudad(); ?></p>
+                        <p><strong>Direccion:</strong> <?php echo $evento->getDireccion(); ?></p>
                         <p><strong>Fecha:</strong> <?php echo $evento->getFecha(); ?> a las <?php echo $evento->getHora(); ?></p>
-                        <h5>Selecciona un sector y compra tus boletas</h5>
+                        <p><strong>Precio:</strong> $<?php echo number_format($evento->getPrecio(), 2); ?></p>
+                        <h5>Selecciona una cantidad y compra tus boletas</h5>
                         
                         <form action="comprarBoletas.php" method="POST">
                             <input type="hidden" name="idEvento" value="<?php echo $idEvento; ?>" />
                             <div class="mb-3">
-                                <label for="sector" class="form-label">Sector</label>
-                                <select name="idSector" id="sector" class="form-select" required>
-                                    <?php foreach ($sectores as $sectorActual) { ?>
-                                        <option value="<?php echo $sectorActual->getIdSector(); ?>">
-                                            <?php echo $sectorActual->getNombre(); ?> - $<?php echo $sectorActual->getPrecio(); ?>
-                                        </option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="mb-3">
                                 <label for="cantidad" class="form-label">Cantidad de boletas</label>
-                                <input type="number" name="cantidad" id="cantidad" class="form-control" min="1" required>
+                                <input type="number" name="cantidad" id="cantidad" class="form-control" min="1" required onchange="generarCamposNombres()">
                             </div>
+                            <!-- Aquí se generarán los campos para los nombres de los usuarios -->
+                            <div id="contenedorNombres"></div>
                             <button type="submit" class="btn btn-primary">Comprar</button>
                         </form>
                     </div>

@@ -13,7 +13,16 @@ class Evento
     private $hora;
     private $descripcion;
     private $categoria;
+    private $precio;
 
+
+    public function getPrecio() {
+        return $this->precio;
+    }
+
+    public function setPrecio($precio) {
+        $this->precio = $precio;
+    }
     public function getIdEvento()
     {
         return $this->idEvento;
@@ -103,7 +112,7 @@ class Evento
     {
         $this->nombre = $nombre;
     }
-    public function __construct($idEvento = 0, $nombre="", $aforo = 0, $ciudad = "", $direccion = "", $fecha = "", $hora = "", $descripcion = "", $categoria = NULL)
+    public function __construct($idEvento = 0, $nombre="", $aforo = 0, $ciudad = "", $direccion = "", $fecha = "", $hora = "", $descripcion = "", $categoria = NULL, $precio = 0)
     {
         $this->idEvento = $idEvento;
         $this->nombre = $nombre;
@@ -114,6 +123,7 @@ class Evento
         $this->hora = $hora;
         $this->descripcion = $descripcion;
         $this->categoria = $categoria;
+        $this->precio = $precio;
     }
     public function consultarTodos(){
         $categorias = array();
@@ -130,7 +140,16 @@ class Evento
                 $categoria -> consultar();
                 $categorias[$registro[8]] = $categoria;
             }
-            $evento = new Evento($registro[0], $registro[1], $registro[2], $registro[3], $registro[4],$registro[5],$registro[6],$registro[7],$categoria);
+            $evento = new Evento($registro[0], 
+                                   $registro[1], 
+                                   $registro[2], 
+                                   $registro[3], 
+                                   $registro[4],
+                                   $registro[5],
+                                   $registro[6],
+                                   $registro[7],
+                                   $categoria,
+                                   $registro[9]);
             array_push($eventos, $evento);
         }
         $conexion -> cerrarConexion();
@@ -152,6 +171,7 @@ class Evento
             $this->fecha = $registro[5];
             $this->hora = $registro[6];
             $this->descripcion = $registro[7];
+            $this->precio = $registro[9];
         }
         $conexion->cerrarConexion();
     }
