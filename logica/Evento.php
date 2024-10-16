@@ -12,8 +12,9 @@ class Evento
     private $fecha;
     private $hora;
     private $descripcion;
-    private $categoria;
     private $precio;
+    private $categoria;
+  
 
 
     public function getPrecio() {
@@ -112,7 +113,7 @@ class Evento
     {
         $this->nombre = $nombre;
     }
-    public function __construct($idEvento = 0, $nombre="", $aforo = 0, $ciudad = "", $direccion = "", $fecha = "", $hora = "", $descripcion = "", $categoria = NULL, $precio = 0)
+    public function __construct($idEvento = 0, $nombre="", $aforo = 0, $ciudad = "", $direccion = "", $fecha = "", $hora = "", $descripcion = "",$precio = 0, $categoria = NULL)
     {
         $this->idEvento = $idEvento;
         $this->nombre = $nombre;
@@ -133,12 +134,12 @@ class Evento
         $eventoDAO = new EventoDAO();
         $conexion -> ejecutarConsulta($eventoDAO -> consultarTodos());
         while($registro = $conexion -> siguienteRegistro()){
-            if(array_key_exists($registro[8], $categorias)){
-                $categoria = $categorias[$registro[8]];
+            if(array_key_exists($registro[9], $categorias)){
+                $categoria = $categorias[$registro[9]];
             }else{
-                $categoria = new Categoria($registro[8]);
+                $categoria = new Categoria($registro[9]);
                 $categoria -> consultar();
-                $categorias[$registro[8]] = $categoria;
+                $categorias[$registro[9]] = $categoria;
             }
             $evento = new Evento($registro[0], 
                                    $registro[1], 
@@ -148,8 +149,8 @@ class Evento
                                    $registro[5],
                                    $registro[6],
                                    $registro[7],
-                                   $categoria,
-                                   $registro[9]);
+                                   $registro[8],
+                                   $categoria) ;
             array_push($eventos, $evento);
         }
         $conexion -> cerrarConexion();
@@ -171,7 +172,7 @@ class Evento
             $this->fecha = $registro[5];
             $this->hora = $registro[6];
             $this->descripcion = $registro[7];
-            $this->precio = $registro[9];
+            $this->precio = $registro[8];
         }
         $conexion->cerrarConexion();
     }
