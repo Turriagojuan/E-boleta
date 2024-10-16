@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-10-2024 a las 06:04:09
+-- Tiempo de generación: 16-10-2024 a las 06:52:40
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -82,8 +82,8 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`idCliente`, `nombre`, `correo`, `telefono`, `direccion`, `clave`) VALUES
-(1, 'Juan Pérez', 'juan.perez@gmail.com', 321654987, 'Carrera 10 #45-78', '28fcaa42e1e22fa10dccfb303d93b981'),
-(2, 'Ana Gómez', 'ana.gomez@gmail.com', 987321654, 'Calle 22 #33-44', '3072f4d7ac1e890f086812fa6efa689e');
+(1, 'Juan Pérez', 'juan.perez@gmail.com', 321654987, 'Carrera 10 #45-78', '56e044c0ec3f8ce92fdab721f26aea0a'),
+(2, 'Ana Gómez', 'ana.gomez@gmail.com', 987321654, 'Calle 22 #33-44', 'a93b0d88486eb6677b3934e389bc7c81');
 
 -- --------------------------------------------------------
 
@@ -179,8 +179,8 @@ CREATE TABLE `proveedor` (
 --
 
 INSERT INTO `proveedor` (`idProveedor`, `nombre`, `correo`, `telefono`, `direccion`, `clave`) VALUES
-(1, 'Proveedor 1', 'contacto@proveedor1.com', 123456789, 'Calle 123', '808221e92608344f8a9266d217f8b8a6'),
-(2, 'Proveedor 2', 'contacto@proveedor2.com', 987654321, 'Avenida 456', '338d9ac5f7a271d18044439cfe7bfc4e');
+(1, 'Proveedor 1', 'contacto@proveedor1.com', 123456789, 'Calle 123', 'eb52fc9a4b3a81a2000a9e774d5aa515'),
+(2, 'Proveedor 2', 'contacto@proveedor2.com', 987654321, 'Avenida 456', 'b984fe77863037ddeb9be2ad7dfb246e');
 
 --
 -- Índices para tablas volcadas
