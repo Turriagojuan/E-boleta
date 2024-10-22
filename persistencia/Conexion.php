@@ -5,7 +5,7 @@ class Conexion{
     private $resultado;
     
     public function abrirConexion(){
-        $this -> mysqlConexion = new mysqli("localhost", "root", "", "eboleta2");
+        $this -> mysqlConexion = new mysqli("localhost", "root", "", "eboleta");
     }
     
     public function ejecutarConsulta($sentenciaSQL){
@@ -15,7 +15,6 @@ class Conexion{
     public function siguienteRegistro(){
         return $this -> resultado -> fetch_row();
     }
-    
     public function obtenerLlaveAutonumerica(){
         return $this -> mysqlConexion -> insert_id;
     }
@@ -27,6 +26,9 @@ class Conexion{
     public function numeroFilas(){
         return $this -> resultado -> num_rows;
     }
-}
 
+    public function getConexion() {
+        return $this->mysqlConexion;
+    }
+}
 ?>

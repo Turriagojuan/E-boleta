@@ -5,7 +5,7 @@ require("logica/Factura.php");
 session_start();
 
 if (!isset($_SESSION['idCliente'])) {
-    header("Location: iniciarSesion.php"); // Redirigir al login si no está autenticado
+    header("Location: iniciarSesion.php");
     exit();
 }
 
@@ -21,16 +21,16 @@ $precioTotal = $evento->getPrecio() * $cantidad; // Calcular el precio total
 
 // Crear una factura
 $factura = new Factura();
-$factura->crearFactura($idCliente, $idEvento, $precioTotal);
+$idFactura = $factura->crearFactura($idCliente, $idEvento, $precioTotal);
 
 // Crear boletas
 for ($i = 0; $i < $cantidad; $i++) {
     $nombreUsuario = $nombresUsuarios[$i];
     $boleta = new Boleta(0, $nombreUsuario, $idEvento, $idCliente);
-    $boleta->crearBoleta();
+    $boleta->crearBoleta($idFactura);
 }
 
 // Redirigir a la página de confirmación
-header("Location: confirmacionCompra.php");
+header("Location: confirmacionCompra.php?idFactura=" .  $idFactura);
 exit();
 ?>

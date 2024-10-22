@@ -14,8 +14,6 @@ class Boleta {
         $this->idEvento = $idEvento;
         $this->idCliente = $idCliente;
     }
-
-    // Getters y setters...
     
     public function getIdBoleta() {
         return $this->idBoleta;
@@ -50,12 +48,30 @@ class Boleta {
     }
 
     // Método para crear una boleta en la base de datos
-    public function crearBoleta() {
+    public function crearBoleta($idFactura) {
         $conexion = new Conexion();
         $conexion->abrirConexion();
         $boletaDAO = new BoletaDAO($this->nombreUsuario, $this->idEvento, $this->idCliente);
         $resultado = $conexion->ejecutarConsulta($boletaDAO->crearBoleta());
+        $this->idBoleta = $conexion->getConexion()->insert_id;
+        $resultado = $conexion->ejecutarConsulta($boletaDAO->crearRelacionFactura($this->idBoleta, $idFactura));
         $conexion->cerrarConexion();
         return $resultado;
+    }
+
+    public function consultarPorFactura($idFactura) {
+        $boletas = array();
+        $conexion = new Conexion();
+        $conexion->abrirConexion();
+        $boletaDAO = new BoletaDAO();
+        $conexion->ejecutarConsulta($boletaDAO->consultarPorFactura($idFactura));
+        while ($registro = $conexion->siguienteRegistro()) {
+            $boleta = new Boleta($registro[0]);
+            $boleta->nombreUsuario = $registro[1];
+            $boleta->idEvento = $registro[2];
+            $boletas[] = $boleta;
+        }
+        $conexion->cerrarConexion();
+        return $boletas;
     }
 }

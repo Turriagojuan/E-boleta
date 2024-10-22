@@ -90,8 +90,8 @@ class Factura {
 
     // Método para crear una factura
     public function crearFactura($idCliente, $idEvento, $precioTotal) {
-        $iva = 19;  // Asumimos un IVA del 19%
-        $subtotal = $precioTotal / (1 + ($iva / 100));  // Cálculo del subtotal antes del IVA
+        $iva = $precioTotal*0.19;  
+        $subtotal = $precioTotal - $iva;  // Cálculo del subtotal antes del IVA
         $total = $precioTotal;
 
         // Obtener la fecha y la hora actuales
@@ -101,10 +101,32 @@ class Factura {
         // Crear la factura en la base de datos usando FacturaDAO
         $conexion = new Conexion();
         $conexion->abrirConexion();
-        $facturaDAO = new FacturaDAO($total, $subtotal, $iva, $fecha, $hora, $idCliente, $idEvento);
+        $facturaDAO = new FacturaDAO(0, $total, $subtotal, $iva, $fecha, $hora, $idCliente, $idEvento);
         $resultado = $conexion->ejecutarConsulta($facturaDAO->crearFactura());
+        // Obtener el último ID insertado (idFactura)
+        $idFactura = $conexion->getConexion()->insert_id;
         $conexion->cerrarConexion();
 
-        return $resultado;
+        return $idFactura;
+    }
+
+    // Método para consultar una factura por su ID
+    public function consultar() {
+        $conexion = new Conexion();
+        $conexion->abrirConexion();
+        $facturaDAO = new FacturaDAO($this->idFactura);
+        $resultado = $conexion->ejecutarConsulta($facturaDAO->consultar());
+        if ($registro = $conexion->siguienteRegistro()) {
+            // Asignar todos los valores obtenidos a los atributos de la clase
+            $this->idFactura = $registro[0];
+            $this->total = $registro[1];
+            $this->subtotal = $registro[2];
+            $this->iva = $registro[3];
+            $this->fecha = $registro[4];
+            $this->hora = $registro[5];
+            $this->idCliente = $registro[6];
+            $this->idEvento = $registro[7];
+        }
+        $conexion->cerrarConexion();
     }
 }

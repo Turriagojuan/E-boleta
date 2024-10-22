@@ -10,7 +10,7 @@ if (isset($_GET["cerrarSesion"])) {
 
 require("logica/Evento.php");
 require("logica/Categoria.php");
-require("logica/Cliente.php"); // Asegúrate de requerir la clase Cliente
+require("logica/Cliente.php"); 
 
 ?>
 
