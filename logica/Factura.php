@@ -90,8 +90,8 @@ class Factura {
 
     // Método para crear una factura
     public function crearFactura($idCliente, $idEvento, $precioTotal) {
-        $iva = 19;  // Asumimos un IVA del 19%
-        $subtotal = $precioTotal / (1 + ($iva / 100));  // Cálculo del subtotal antes del IVA
+        $iva = $precioTotal*0.19;  
+        $subtotal = $precioTotal - $iva;  // Cálculo del subtotal antes del IVA
         $total = $precioTotal;
 
         // Obtener la fecha y la hora actuales
