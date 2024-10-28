@@ -1,9 +1,9 @@
 <?php
 session_start();
-if(!isset($_SESSION["id"])){
+if(!isset($_SESSION["idProveedor"])){
     header("Location: iniciarSesion.php");
 }
-$id = $_SESSION["id"];
+$id = $_SESSION["idProveedor"];
 require ("logica/Persona.php");
 require ("logica/Proveedor.php");
 $proveedor = new Proveedor($id);

@@ -10,14 +10,16 @@ if (isset($_POST["autenticar"])) {
     $proveedor = new Proveedor(null, null, $_POST["correo"], null, null, md5($_POST["clave"]));
     if ($proveedor->autenticar()) {
         $_SESSION["idProveedor"] = $proveedor->getIdPersona(); // Iniciar sesión para proveedor
-        header("Location: sesionProveedor.php");     
+		header("Location: sesionProveedor.php");
+		exit();     
     } else {
         // Si no es proveedor, intentamos autenticar como cliente
-        $cliente = new Cliente(null, null, $_POST["correo"], null, null, md5($_POST["clave"]));
+		$cliente = new Cliente(null, null, $_POST["correo"], null, null, md5($_POST["clave"]));
         if ($cliente->autenticar()) {
             $_SESSION["idCliente"] = $cliente->getIdPersona(); // Iniciar sesión para cliente
             header("Location: index.php"); // Redirigir a la sesión del cliente
-        } else {
+			exit();
+		} else {
             $error = true; // Si no es cliente ni proveedor, mostrar error
         }
     }

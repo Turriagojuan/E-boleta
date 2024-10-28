@@ -3,12 +3,12 @@ session_start();
 require_once('logica/Proveedor.php');
 
 
-if (!isset($_SESSION['id'])) {
+if (!isset($_SESSION['idProveedor'])) {
     header('Location: iniciarSesion.php');
     exit();
 }
 
-$idProveedor = $_SESSION['id'];
+$idProveedor = $_SESSION['idProveedor'];
 $proveedor = new Proveedor($idProveedor);
 
 
