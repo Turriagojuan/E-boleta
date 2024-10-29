@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-10-2024 a las 06:52:40
+-- Tiempo de generación: 29-10-2024 a las 12:53:37
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `eboleta2`
+-- Base de datos: `eboleta`
 --
 
 -- --------------------------------------------------------
@@ -40,7 +40,10 @@ CREATE TABLE `boleta` (
 
 INSERT INTO `boleta` (`idBoleta`, `nombre_usuario`, `Evento_idEvento`, `Cliente_idCliente`) VALUES
 (1, 'jperez', 1, 1),
-(2, 'agomez', 2, 2);
+(2, 'agomez', 2, 2),
+(3, 'juan', 1, 1),
+(4, 'juan2', 1, 1),
+(5, 'juan3', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -111,8 +114,7 @@ CREATE TABLE `evento` (
 
 INSERT INTO `evento` (`idEvento`, `nombre`, `aforo`, `ciudad`, `direccion`, `fecha`, `hora`, `descripcion`, `precio`, `Proveedor_idProveedor`, `Tipo_evento_idCategoria`) VALUES
 (1, 'Concierto Rock', 5000, 'Bogotá', 'Estadio XYZ', '2024-11-01', '19:00:00', 'Un concierto de rock con bandas nacionales.', 150000, 1, 1),
-(2, 'Obra de Teatro', 300, 'Medellín', 'Teatro ABC', '2024-12-05', '20:00:00', 'Una obra de teatro clásica.', 50000, 2, 2),
-(10, 'Bogotafes', 500, 'Medellin', 'calle de la muelte #4', '2024-10-16', '14:33:00', 'jkbnkjn jknknk kjnk', 0, 1, 2);
+(2, 'Obra de Teatro', 300, 'Medellín', 'Teatro ABC', '2024-12-05', '20:00:00', 'Una obra de teatro clásica.', 50000, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -137,7 +139,8 @@ CREATE TABLE `factura` (
 
 INSERT INTO `factura` (`idFactura`, `total`, `subtotal`, `iva`, `fecha`, `hora`, `Cliente_idCliente`, `Evento_idEvento`) VALUES
 (1, 170000, 150000, 20000, '2024-10-01', '15:30:00', 1, 1),
-(2, 50000, 45000, 5000, '2024-10-05', '18:00:00', 2, 2);
+(2, 50000, 45000, 5000, '2024-10-05', '18:00:00', 2, 2),
+(3, 450000, 364500, 85500, '2024-10-28', '18:58:03', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -157,7 +160,10 @@ CREATE TABLE `factura_boleta` (
 
 INSERT INTO `factura_boleta` (`Boleta_idBoleta`, `Factura_idFactura`, `cantidad`) VALUES
 (1, 1, 2),
-(2, 2, 1);
+(2, 2, 1),
+(3, 3, 1),
+(4, 3, 1),
+(5, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -243,7 +249,7 @@ ALTER TABLE `proveedor`
 -- AUTO_INCREMENT de la tabla `boleta`
 --
 ALTER TABLE `boleta`
-  MODIFY `idBoleta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idBoleta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
@@ -255,13 +261,13 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `evento`
 --
 ALTER TABLE `evento`
-  MODIFY `idEvento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idEvento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `idFactura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idFactura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
