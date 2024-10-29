@@ -13,7 +13,8 @@ class EventoDAO
     private $descripcion;
     private $precio;
 
-    public function __construct($idEvento = 0, $nombre="", $aforo = 0, $ciudad = "", $direccion = "", $fecha = "", $hora = "", $descripcion = "",$precio=0)
+    // Constructor para inicializar los atributos del evento
+    public function __construct($idEvento = 0, $nombre = "", $aforo = 0, $ciudad = "", $direccion = "", $fecha = "", $hora = "", $descripcion = "", $precio = 0)
     {
         $this->idEvento = $idEvento;
         $this->nombre = $nombre;
@@ -26,14 +27,17 @@ class EventoDAO
         $this->precio = $precio;
     }
 
+    // Método para consultar todos los eventos en la base de datos
     public function consultarTodos(){
-        return "select idEvento, nombre, aforo, ciudad, direccion, fecha, hora, descripcion,precio, Tipo_evento_idCategoria 
-                from Evento";
+        return "SELECT idEvento, nombre, aforo, ciudad, direccion, fecha, hora, descripcion, precio, Tipo_evento_idCategoria 
+                FROM Evento";
     }
 
     // Método para consultar un evento por su ID
     public function consultarPorId(){
-        return "SELECT idEvento, nombre, aforo, ciudad, direccion, fecha, hora, descripcion, precio, Tipo_evento_idCategoria FROM Evento WHERE idEvento = " . $this->idEvento;
+        return "SELECT idEvento, nombre, aforo, ciudad, direccion, fecha, hora, descripcion, precio, Tipo_evento_idCategoria 
+                FROM Evento 
+                WHERE idEvento = " . $this->idEvento;
     }
 
 }

@@ -5,22 +5,27 @@ class BoletaDAO {
     private $idEvento;
     private $idCliente;
 
+    // Constructor de la clase BoletaDAO que inicializa los datos necesarios para la creación y consulta de boletas
     public function __construct($nombreUsuario = "", $idEvento = 0, $idCliente = 0) {
         $this->nombreUsuario = $nombreUsuario;
         $this->idEvento = $idEvento;
         $this->idCliente = $idCliente;
     }
 
-    // Método para crear una boleta en la tabla boleta
+    // Retorna la consulta SQL para crear una boleta en la tabla boleta
     public function crearBoleta() {
         return "INSERT INTO boleta (nombre_usuario, Evento_idEvento, Cliente_idCliente) 
                 VALUES ('" . $this->nombreUsuario . "', " . $this->idEvento . ", " . $this->idCliente . ")";
     }
+
+    // Retorna la consulta SQL para crear una relación entre una boleta y una factura en la tabla factura_boleta
+   
     public function crearRelacionFactura($idBoleta, $idFactura) {
         return "INSERT INTO factura_boleta (Boleta_idBoleta, Factura_idFactura, cantidad) 
                 VALUES ('" . $idBoleta . "', " . $idFactura . ", " . 1 . ")";
     }
 
+    // Retorna la consulta SQL para obtener boletas asociadas a una factura específica
     public function consultarPorFactura($idFactura) {
         return "SELECT b.idBoleta, b.nombre_usuario, b.Evento_idEvento
                 FROM boleta b

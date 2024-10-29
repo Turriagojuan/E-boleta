@@ -1,24 +1,39 @@
 <?php
+// Inicia la sesión
 session_start();
-if(!isset($_SESSION["idProveedor"])){
+
+// Verifica si el proveedor ha iniciado sesión; si no, redirige a la página de inicio de sesión
+if (!isset($_SESSION["idProveedor"])) {
     header("Location: iniciarSesion.php");
 }
+
+// Obtiene el ID del proveedor desde la sesión
 $id = $_SESSION["idProveedor"];
+
+// Incluye la clase Proveedor para manejar la lógica relacionada
 require("logica/Proveedor.php");
+
+// Crea una instancia de la clase Proveedor con el ID del proveedor actual
 $proveedor = new Proveedor($id);
-$proveedor -> consultar();
+
+// Consulta la información del proveedor
+$proveedor->consultar();
 ?>
 
 <html>
 <head>
+    <!-- Carga el CSS de Bootstrap para estilos -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Carga el JavaScript de Bootstrap para funcionalidades -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<?php include("encabezado.php"); ?>
+    <!-- Incluye el encabezado común en todas las páginas -->
+    <?php include("encabezado.php"); ?>
 
     <div class="container mt-5">
         <h2>Agregar Nuevo Evento</h2>
+        <!-- Formulario para agregar un nuevo evento -->
         <form action="agregar.php" method="POST">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre del Evento</label>
@@ -53,24 +68,25 @@ $proveedor -> consultar();
                 <input type="number" class="form-control" id="precio" name="precio" step="0.01" required>
             </div>
             <div class="mb-3">
-            <label for="categoria">Categoría:</label>
-    <select id="categoria" name="idCategoria" required>
-        <?php
-        require_once('logica/Categoria.php');
-        $categoria = new Categoria();
-        $categorias = $categoria->consultarTodos();
-        foreach($categorias as $categoriaActual){
-            echo "<option value='".$categoriaActual->getIdCategoria()."'>".$categoriaActual->getNombre()."</option>";   
-        }
-
-        ?>
-    </select>
+                <label for="categoria" class="form-label">Categoría:</label>
+                <select id="categoria" name="idCategoria" class="form-select" required>
+                    <?php
+                    // Incluye la clase Categoria para manejar categorías de eventos
+                    require_once('logica/Categoria.php');
+                    $categoria = new Categoria();
+                    
+                    // Obtiene todas las categorías disponibles
+                    $categorias = $categoria->consultarTodos();
+                    foreach ($categorias as $categoriaActual) {
+                        // Crea una opción en el select por cada categoría
+                        echo "<option value='" . htmlspecialchars($categoriaActual->getIdCategoria()) . "'>" . htmlspecialchars($categoriaActual->getNombre()) . "</option>";
+                    }
+                    ?>
+                </select>
             </div>
+            <!-- Botón para enviar el formulario -->
             <button type="submit" class="btn btn-primary">Agregar Evento</button>
         </form>
     </div>
 </body>
 </html>
-
-
-

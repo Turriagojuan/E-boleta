@@ -1,6 +1,6 @@
 <?php
 
-class ClienteDAO{
+class ClienteDAO {
     private $idPersona;
     private $nombre;
     private $correo;
@@ -8,27 +8,30 @@ class ClienteDAO{
     private $direccion;
     private $clave;
 
+    // Constructor de la clase ClienteDAO que inicializa los atributos necesarios
 
-    public function __construct($idPersona=NULL, $nombre=NULL, $correo=NULL, $telefono=NULL, $direccion=NULL, $clave=NULL)
-    {
-        $this -> idPersona = $idPersona;
-        $this -> nombre = $nombre;
-        $this -> correo = $correo;
-        $this -> telefono = $telefono;
-        $this -> direccion = $direccion;
-        $this -> clave = $clave;
+    public function __construct($idPersona = NULL, $nombre = NULL, $correo = NULL, $telefono = NULL, $direccion = NULL, $clave = NULL) {
+        $this->idPersona = $idPersona;
+        $this->nombre = $nombre;
+        $this->correo = $correo;
+        $this->telefono = $telefono;
+        $this->direccion = $direccion;
+        $this->clave = $clave;
     }
-    
-    public function autenticar(){
-        return "select idCliente
-                from Cliente 
-                where correo = '" . $this -> correo . "' and clave = '" . $this -> clave . "'";
+
+    // Retorna la consulta SQL para autenticar a un cliente con su correo y clave
+    public function autenticar() {
+        return "SELECT idCliente
+                FROM Cliente 
+                WHERE correo = '" . $this->correo . "' AND clave = '" . $this->clave . "'";
     }
-    
-    public function consultar(){
-        return "select nombre, correo
-                from Cliente
-                where idCliente = '" . $this -> idPersona . "'";
+
+    // Retorna la consulta SQL para consultar el nombre y correo de un cliente por su ID
+    public function consultar() {
+        return "SELECT nombre, correo
+                FROM Cliente
+                WHERE idCliente = '" . $this->idPersona . "'";
     }
-    
 }
+
+?>

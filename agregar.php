@@ -1,32 +1,31 @@
 <?php
-session_start();
-require_once('logica/Proveedor.php');
+session_start(); // Iniciar la sesión para acceder a las variables de sesión
+require_once('logica/Proveedor.php'); // Incluir la clase Proveedor
 
-
+// Verificar si el proveedor está autenticado
 if (!isset($_SESSION['idProveedor'])) {
-    header('Location: iniciarSesion.php');
+    header('Location: iniciarSesion.php'); // Redirigir a la página de inicio de sesión si no está autenticado
     exit();
 }
 
-$idProveedor = $_SESSION['idProveedor'];
-$proveedor = new Proveedor($idProveedor);
+$idProveedor = $_SESSION['idProveedor']; // Obtener el ID del proveedor de la sesión
+$proveedor = new Proveedor($idProveedor); // Crear una instancia del proveedor
 
-
-function procesarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion,$precio, $idCategoria, $proveedor) {
+// Función para procesar el evento
+function procesarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $precio, $idCategoria, $proveedor) {
     // Validar que los campos requeridos no estén vacíos
     if (empty($nombre) || empty($aforo) || empty($ciudad) || empty($direccion) || empty($fecha) || empty($hora) || empty($idCategoria) || empty($precio)) {
         return false; // Algún campo requerido está vacío
     }
 
-    // Validar formatos (puedes añadir más validaciones según necesidad)
+    // Validar que el aforo sea un número positivo
     if (!is_numeric($aforo) || $aforo <= 0) {
         return false; // El aforo debe ser un número positivo
     }
 
-    // Si todo es válido, agregar el evento
+    // Si todo es válido, intentar agregar el evento
     try {
-        // Llama al método agregarEvento del proveedor
-        $proveedor->agregarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion,$precio, $idCategoria);
+        $proveedor->agregarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $precio, $idCategoria); // Llamar al método agregarEvento
         return true; // El evento fue agregado exitosamente
     } catch (Exception $e) {
         // Manejo de errores (podrías logear el error para depuración)
@@ -34,6 +33,7 @@ function procesarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $de
     }
 }
 
+// Verificar si se envió el formulario
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Captura los datos del formulario
     $nombre = $_POST['nombre'];
@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $precio = $_POST['precio'];
     $idCategoria = $_POST['idCategoria'];
 
+    // Imprimir datos para depuración
     echo "<pre>";
     echo "Nombre del evento: " . htmlspecialchars($nombre) . "\n";
     echo "Aforo: " . htmlspecialchars($aforo) . "\n";
@@ -54,10 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "Fecha: " . htmlspecialchars($fecha) . "\n";
     echo "Hora: " . htmlspecialchars($hora) . "\n";
     echo "Descripción: " . htmlspecialchars($descripcion) . "\n";
-    echo "precio: " . htmlspecialchars($precio) . "\n";
+    echo "Precio: " . htmlspecialchars($precio) . "\n";
     echo "ID Categoría: " . htmlspecialchars($idCategoria) . "\n";
     echo "</pre>";
-    
 
     // Llamada al método procesarEvento para manejar la lógica
     if (procesarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $precio, $idCategoria, $proveedor)) {

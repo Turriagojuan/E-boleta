@@ -10,7 +10,8 @@ class FacturaDAO {
     private $idCliente;
     private $idEvento;
 
-    public function __construct($idFactura=0, $total = 0, $subtotal = 0, $iva = 0, $fecha = "", $hora = "", $idCliente = 0, $idEvento = 0) {
+    // Constructor para inicializar los atributos de la factura
+    public function __construct($idFactura = 0, $total = 0, $subtotal = 0, $iva = 0, $fecha = "", $hora = "", $idCliente = 0, $idEvento = 0) {
         $this->idFactura = $idFactura;
         $this->total = $total;
         $this->subtotal = $subtotal;
@@ -35,6 +36,7 @@ class FacturaDAO {
                 VALUES (" . $this->total . ", " . $this->subtotal . ", " . $this->iva . ", '" . $this->fecha . "', '" . $this->hora . "', " . $this->idCliente . ", " . $this->idEvento . ")";
     }
 
+    // Consulta SQL para obtener los detalles de una factura por su ID
     public function consultar() {
         return "SELECT idFactura, total, subtotal, iva, fecha, hora, Cliente_idCliente, Evento_idEvento 
                 FROM factura 

@@ -3,21 +3,22 @@ session_start();
 
 // Cerrar sesión si se recibe el parámetro "cerrarSesion"
 if (isset($_GET["cerrarSesion"])) {
-    session_destroy();
+    session_destroy(); // Destruir la sesión actual
     header("Location: index.php"); // Redirigir al index después de cerrar sesión
-    exit();
+    exit(); // Terminar el script
 }
 
+// Incluir las clases necesarias para la lógica de negocio
 require("logica/Evento.php");
 require("logica/Categoria.php");
 require("logica/Cliente.php"); 
-
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
+    <!-- Enlazar Bootstrap CSS y JS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <meta charset="UTF-8">
@@ -26,7 +27,7 @@ require("logica/Cliente.php");
 </head>
 
 <body>
-    <?php include("encabezado.php"); ?>
+    <?php include("encabezado.php"); ?> <!-- Incluir el encabezado de la página -->
     
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
@@ -42,6 +43,7 @@ require("logica/Cliente.php");
                         $categoria = new Categoria();
                         $categorias = $categoria->consultarTodos();
                         foreach ($categorias as $categoriaActual) {
+                            // Mostrar cada categoría como un enlace en el menú
                             echo "<li class='nav-item'><a class='nav-link' href='#' role='button'>" . $categoriaActual->getNombre() . "</a></li>";
                         }
                     ?>
@@ -49,7 +51,7 @@ require("logica/Cliente.php");
                 <ul class="navbar-nav">
                     <?php 
                     if (isset($_SESSION['idCliente'])) {
-                        // Mostrar nombre del cliente autenticado
+                        // Mostrar el nombre del cliente autenticado
                         $cliente = new Cliente($_SESSION['idCliente']);
                         $cliente->consultar(); // Consultar el nombre del cliente desde la base de datos
                         echo "<li class='nav-item'><a class='nav-link' href='#'>Bienvenido, " . $cliente->getNombre() . "</a></li>";
@@ -69,17 +71,18 @@ require("logica/Cliente.php");
             <div class="col">
                 <div class="card border-primary">
                     <div class="card-header text-bg-info">
-                        <h4>Eventos</h4>
+                        <h4>Eventos</h4> <!-- Título de la sección de eventos -->
                     </div>
                     <div class="card-body">
                         <?php
-                        $i = 0;
+                        $i = 0; // Contador para el diseño en columnas
                         $evento = new Evento();
-                        $eventos = $evento->consultarTodos();
+                        $eventos = $evento->consultarTodos(); // Consultar todos los eventos
                         foreach ($eventos as $eventoActual) {
                             if ($i % 4 == 0) {
-                                echo "<div class='row mb-3'>";
+                                echo "<div class='row mb-3'>"; // Iniciar una nueva fila cada 4 eventos
                             }
+                            // Mostrar cada evento en una tarjeta
                             echo "<div class='col-lg-3 col-md-4 col-sm-6'>";
                             echo "<div class='card text-bg-light'>";
                             echo "<div class='card-body'>";
@@ -93,12 +96,12 @@ require("logica/Cliente.php");
                             echo "</div>";
 
                             if ($i % 4 == 3) {
-                                echo "</div>";
+                                echo "</div>"; // Cerrar la fila después de 4 eventos
                             }
-                            $i++;
+                            $i++; // Incrementar el contador
                         }
                         if ($i % 4 != 0) {
-                            echo "</div>";
+                            echo "</div>"; // Cerrar la última fila si no está cerrada
                         }
                         ?>
                     </div>
