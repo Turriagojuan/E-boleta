@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `eboleta`
+-- Base de datos: `eboleta2`
 --
 
 -- --------------------------------------------------------
@@ -28,11 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `boleta` (
-  `idBoleta` int(11) NOT NULL,
+  `idBoleta` int NOT NULL,
   `nombre_usuario` varchar(45) NOT NULL,
-  `Evento_idEvento` int(11) NOT NULL,
-  `Cliente_idCliente` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `Evento_idEvento` int NOT NULL,
+  `Cliente_idCliente` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Volcado de datos para la tabla `boleta`
@@ -52,9 +52,9 @@ INSERT INTO `boleta` (`idBoleta`, `nombre_usuario`, `Evento_idEvento`, `Cliente_
 --
 
 CREATE TABLE `categoria` (
-  `idCategoria` int(11) NOT NULL,
+  `idCategoria` int NOT NULL,
   `nombre` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Volcado de datos para la tabla `categoria`
@@ -72,13 +72,13 @@ INSERT INTO `categoria` (`idCategoria`, `nombre`) VALUES
 --
 
 CREATE TABLE `cliente` (
-  `idCliente` int(11) NOT NULL,
+  `idCliente` int NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `correo` varchar(45) NOT NULL,
-  `telefono` int(11) NOT NULL,
+  `telefono` int NOT NULL,
   `direccion` varchar(45) NOT NULL,
   `clave` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Volcado de datos para la tabla `cliente`
@@ -95,9 +95,9 @@ INSERT INTO `cliente` (`idCliente`, `nombre`, `correo`, `telefono`, `direccion`,
 --
 
 CREATE TABLE `evento` (
-  `idEvento` int(11) NOT NULL,
+  `idEvento` int NOT NULL,
   `nombre` varchar(45) NOT NULL,
-  `aforo` int(11) NOT NULL,
+  `aforo` int NOT NULL,
   `ciudad` varchar(45) NOT NULL,
   `direccion` varchar(45) NOT NULL,
   `fecha` date NOT NULL,
@@ -123,15 +123,15 @@ INSERT INTO `evento` (`idEvento`, `nombre`, `aforo`, `ciudad`, `direccion`, `fec
 --
 
 CREATE TABLE `factura` (
-  `idFactura` int(11) NOT NULL,
+  `idFactura` int NOT NULL,
   `total` float NOT NULL,
   `subtotal` float NOT NULL,
-  `iva` int(11) NOT NULL,
+  `iva` int NOT NULL,
   `fecha` date NOT NULL,
   `hora` time NOT NULL,
-  `Cliente_idCliente` int(11) NOT NULL,
-  `Evento_idEvento` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `Cliente_idCliente` int NOT NULL,
+  `Evento_idEvento` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Volcado de datos para la tabla `factura`
@@ -149,10 +149,10 @@ INSERT INTO `factura` (`idFactura`, `total`, `subtotal`, `iva`, `fecha`, `hora`,
 --
 
 CREATE TABLE `factura_boleta` (
-  `Boleta_idBoleta` int(11) NOT NULL,
-  `Factura_idFactura` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `Boleta_idBoleta` int NOT NULL,
+  `Factura_idFactura` int NOT NULL,
+  `cantidad` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Volcado de datos para la tabla `factura_boleta`
@@ -172,13 +172,13 @@ INSERT INTO `factura_boleta` (`Boleta_idBoleta`, `Factura_idFactura`, `cantidad`
 --
 
 CREATE TABLE `proveedor` (
-  `idProveedor` int(11) NOT NULL,
+  `idProveedor` int NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `correo` varchar(45) NOT NULL,
-  `telefono` int(11) NOT NULL,
+  `telefono` int NOT NULL,
   `direccion` varchar(45) NOT NULL,
   `clave` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Volcado de datos para la tabla `proveedor`
