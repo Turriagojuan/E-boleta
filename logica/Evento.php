@@ -2,7 +2,6 @@
 require_once("./persistencia/Conexion.php");
 require("./persistencia/EventoDAO.php");
 
-// La clase Evento representa un evento con sus respectivos atributos y métodos para la manipulación en la base de datos
 class Evento
 {
     private $idEvento;
@@ -12,11 +11,11 @@ class Evento
     private $direccion;
     private $fecha;
     private $hora;
+    private $imagen;
     private $descripcion;
     private $precio;
     private $categoria;
 
-    // Getter y Setter para el precio del evento
     public function getPrecio() {
         return $this->precio;
     }
@@ -25,7 +24,6 @@ class Evento
         $this->precio = $precio;
     }
 
-    // Getter y Setter para el identificador del evento
     public function getIdEvento() {
         return $this->idEvento;
     }
@@ -34,7 +32,6 @@ class Evento
         $this->idEvento = $idEvento;
     }
 
-    // Getter y Setter para el aforo del evento
     public function getAforo() {
         return $this->aforo;
     }
@@ -42,8 +39,6 @@ class Evento
     public function setAforo($aforo) {
         $this->aforo = $aforo;
     }
-
-    // Getter y Setter para la ciudad del evento
     public function getCiudad() {
         return $this->ciudad;
     }
@@ -52,7 +47,7 @@ class Evento
         $this->ciudad = $ciudad;
     }
 
-    // Getter y Setter para la dirección del evento
+
     public function getDireccion() {
         return $this->direccion;
     }
@@ -60,8 +55,6 @@ class Evento
     public function setDireccion($direccion) {
         $this->direccion = $direccion;
     }
-
-    // Getter y Setter para la fecha del evento
     public function getFecha() {
         return $this->fecha;
     }
@@ -69,8 +62,6 @@ class Evento
     public function setFecha($fecha) {
         $this->fecha = $fecha;
     }
-
-    // Getter y Setter para la hora del evento
     public function getHora() {
         return $this->hora;
     }
@@ -78,8 +69,6 @@ class Evento
     public function setHora($hora) {
         $this->hora = $hora;
     }
-
-    // Getter y Setter para la descripción del evento
     public function getDescripcion() {
         return $this->descripcion;
     }
@@ -88,7 +77,6 @@ class Evento
         $this->descripcion = $descripcion;
     }
 
-    // Getter y Setter para la categoría del evento
     public function getCategoria() {
         return $this->categoria;
     }
@@ -97,7 +85,6 @@ class Evento
         $this->categoria = $categoria;
     }
 
-    // Getter y Setter para el nombre del evento
     public function getNombre() {
         return $this->nombre;
     }
@@ -105,10 +92,14 @@ class Evento
     public function setNombre($nombre) {
         $this->nombre = $nombre;
     }
-
-    // Constructor de la clase Evento que inicializa los atributos del evento
+    public function getImagen () {
+        return $this->imagen;
+    }
+    public function setImagen($imagen){
+        $this->imagen = $imagen;
+    }
  
-    public function __construct($idEvento = 0, $nombre = "", $aforo = 0, $ciudad = "", $direccion = "", $fecha = "", $hora = "", $descripcion = "", $precio = 0, $categoria = NULL) {
+    public function __construct($idEvento = 0, $nombre = "", $aforo = 0, $ciudad = "", $direccion = "", $fecha = "", $hora = "", $descripcion = "", $precio = 0,$imagen="", $categoria = NULL) {
         $this->idEvento = $idEvento;
         $this->nombre = $nombre;
         $this->aforo = $aforo;
@@ -119,6 +110,7 @@ class Evento
         $this->descripcion = $descripcion;
         $this->categoria = $categoria;
         $this->precio = $precio;
+        $this -> imagen = $imagen;
     }
 
     // Método para consultar todos los eventos y sus categorías de la base de datos
@@ -129,25 +121,18 @@ class Evento
         $conexion = new Conexion();
         $conexion->abrirConexion();
         $eventoDAO = new EventoDAO();
-
-        // Ejecuta la consulta para obtener todos los eventos
         $conexion->ejecutarConsulta($eventoDAO->consultarTodos());
-
-        // Itera sobre cada registro y construye un objeto Evento con los datos obtenidos
         while($registro = $conexion->siguienteRegistro()) {
-            // Verifica si la categoría ya está almacenada en el arreglo de categorías
-            if(array_key_exists($registro[9], $categorias)) {
-                $categoria = $categorias[$registro[9]];
+            if(array_key_exists($registro[10], $categorias)) {
+                $categoria = $categorias[$registro[10]];
             } else {
-                $categoria = new Categoria($registro[9]);
+                $categoria = new Categoria($registro[10]);
                 $categoria->consultar();
-                $categorias[$registro[9]] = $categoria;
+                $categorias[$registro[10]] = $categoria;
             }
-            // Crea un objeto Evento con los datos obtenidos y lo almacena en el arreglo de eventos
-            $evento = new Evento($registro[0], $registro[1], $registro[2], $registro[3], $registro[4], $registro[5], $registro[6], $registro[7], $registro[8], $categoria);
+            $evento = new Evento($registro[0], $registro[1], $registro[2], $registro[3], $registro[4], $registro[5], $registro[6], $registro[7], $registro[8],$registro[9], $categoria);
             array_push($eventos, $evento);
         }
-        
         $conexion->cerrarConexion();
         return $eventos;
     }
@@ -157,12 +142,10 @@ class Evento
         $conexion = new Conexion();
         $conexion->abrirConexion();
         
-        // Crea una instancia de EventoDAO y consulta el evento por su id
         $eventoDAO = new EventoDAO($this->idEvento);
-        $conexion->ejecutarConsulta($eventoDAO->consultarPorId());
+        $conexion->ejecutarConsulta($eventoDAO->consultar());
         $registro = $conexion->siguienteRegistro();
 
-        // Si se encuentra el registro, asigna sus valores a los atributos del objeto
         if ($registro != null) {
             $this->nombre = $registro[1];
             $this->aforo = $registro[2];
@@ -172,8 +155,58 @@ class Evento
             $this->hora = $registro[6];
             $this->descripcion = $registro[7];
             $this->precio = $registro[8];
+
         }
         
         $conexion->cerrarConexion();
     }
+    public function editar() {
+        $conexion = new Conexion();
+        $conexion->abrirConexion();
+        $eventoDAO = new EventoDAO($this->idEvento, $this->nombre, $this->aforo, $this->ciudad, $this->direccion, $this->fecha, $this->hora, $this->descripcion, $this->precio, $this->imagen, $this->categoria);
+        $conexion->ejecutarConsulta($eventoDAO->editar());
+        $conexion->cerrarConexion();
+    }
+    public function editarImagen() {
+        $conexion = new Conexion();
+        $conexion->abrirConexion();
+        $eventoDAO = new EventoDAO($this->idEvento, "", 0, "", "", "", "", "", 0, $this->imagen, null);
+        $conexion->ejecutarConsulta($eventoDAO->editarImagen());
+        $conexion->cerrarConexion();
+    }
+    public function buscar($filtro) {
+        $categorias = array();
+        $eventos = array();
+        $conexion = new Conexion();
+        $conexion->abrirConexion();
+        $eventoDAO = new EventoDAO();
+        $conexion->ejecutarConsulta($eventoDAO->buscar($filtro));
+        while($registro = $conexion->siguienteRegistro()) {
+            if(array_key_exists($registro[10], $categorias)) {
+                $categoria = $categorias[$registro[10]];
+            } else {
+                $categoria = new Categoria($registro[10]);
+                $categoria->consultar();
+                $categorias[$registro[10]] = $categoria;
+            }
+            $evento = new Evento($registro[0], $registro[1], $registro[2], $registro[3], $registro[4], $registro[5], $registro[6], $registro[7], $registro[8], $registro[9], $categoria);
+            array_push($eventos, $evento);
+        }
+        $conexion->cerrarConexion();
+        return $eventos;
+    }
+    public function consultarEventosPorCategoria() {
+        $conexion = new Conexion();
+        $conexion->abrirConexion();
+        $eventoDAO = new EventoDAO();
+        $conexion->ejecutarConsulta($eventoDAO->consultarEventosPorCategoria());
+        $eventosPorCategoria = array();
+        while($registro = $conexion->siguienteRegistro()) {
+            array_push($eventosPorCategoria, array($registro[0], $registro[1]));
+        }
+        $conexion->cerrarConexion();
+        return $eventosPorCategoria;
+    }
+    
+    
 }

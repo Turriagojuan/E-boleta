@@ -32,6 +32,11 @@ class ClienteDAO {
                 FROM Cliente
                 WHERE idCliente = '" . $this->idPersona . "'";
     }
+    public function registrar() {
+        return "INSERT INTO Cliente (nombre, correo, telefono, direccion, clave)
+                VALUES ('" . $this->nombre . "', '" . $this->correo . "', '" . $this->telefono . "', '" . $this->direccion . "', '" . $this->clave . "')";
+    }
+    
 }
 
 ?>

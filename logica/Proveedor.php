@@ -1,9 +1,10 @@
 <?php
+/*
 require_once ("./persistencia/Conexion.php");
 require_once ("./logica/Persona.php");
 require_once ("./persistencia/ProveedorDAO.php");
 require_once("./logica/Categoria.php");
-
+*/
 // La clase Proveedor extiende la clase Persona y representa a un proveedor con la capacidad de gestionar eventos.
 class Proveedor extends Persona {
     private $eventos;
@@ -20,7 +21,7 @@ class Proveedor extends Persona {
         return $this->eventos;
     }
 
-    // Asigna la lista de eventos asociados al proveedor
+
 
     public function setEventos($eventos) {
         $this->eventos = $eventos;
@@ -58,12 +59,12 @@ class Proveedor extends Persona {
 
     // Agrega un nuevo evento asociado al proveedor en la base de datos
 
-    public function agregarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $precio, $idCategoria) {
+    /*public function agregarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $precio, $idCategoria) {
         $conexion = new Conexion();
         $conexion->abrirConexion();
         $proveedorDAO = new ProveedorDAO($this->idPersona);
         $consulta = $proveedorDAO->agregarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $precio, $idCategoria);
         $conexion->ejecutarConsulta($consulta);
         $conexion->cerrarConexion();
-    }
+    }*/
 }
