@@ -1,10 +1,13 @@
 <?php
-session_start(); // Iniciar la sesión para manejar las variables de sesión
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); // Iniciar la sesión para manejar las variables de sesión
+}
 
 // Incluir las clases necesarias para la autenticación de usuarios
-require("logica/Persona.php");
-require("logica/Proveedor.php");
-require("logica/Cliente.php");
+require_once(__DIR__ . "/../logica/Persona.php");
+require_once(__DIR__ . "/../logica/Proveedor.php");
+require_once(__DIR__ . "/../logica/Cliente.php");
+
 $error = false; // Inicializar la variable de error
 
 // Verificar si se envió el formulario de autenticación
@@ -13,14 +16,14 @@ if (isset($_POST["autenticar"])) {
     $proveedor = new Proveedor(null, null, $_POST["correo"], null, null, md5($_POST["clave"])); // Crear objeto Proveedor
     if ($proveedor->autenticar()) { // Intentar autenticar al proveedor
         $_SESSION["idProveedor"] = $proveedor->getIdPersona(); // Iniciar sesión para proveedor
-        header("Location: sesionProveedor.php"); // Redirigir a la sesión del proveedor
+        header("Location: ?pid=" . base64_encode("presentacion/proveedor/sesionProveedor.php")); // Redirigir a la sesión del proveedor
         exit();     
     } else {
         // Si no es proveedor, intentamos autenticar como cliente
         $cliente = new Cliente(null, null, $_POST["correo"], null, null, md5($_POST["clave"])); // Crear objeto Cliente
         if ($cliente->autenticar()) { // Intentar autenticar al cliente
             $_SESSION["idCliente"] = $cliente->getIdPersona(); // Iniciar sesión para cliente
-            header("Location: index.php"); // Redirigir a la sesión del cliente
+            header("Location: ?"); // Redirigir a la sesión del cliente
             exit();
         } else {
             $error = true; // Si no es cliente ni proveedor, marcar error
@@ -46,7 +49,7 @@ if (isset($_POST["autenticar"])) {
                         <h4>Iniciar Sesion</h4> <!-- Título del formulario -->
                     </div>
                     <div class="card-body">
-                        <form method="post" action="iniciarSesion.php"> <!-- Formulario para iniciar sesión -->
+                        <form method="post" action="?pid=<?php echo base64_encode("presentacion/iniciarSesion.php")?>"> <!-- Formulario para iniciar sesión -->
                             <div class="mb-3">
                                 <input type="email" name="correo" class="form-control" placeholder="Correo" required> <!-- Campo para el correo -->
                             </div>

@@ -1,26 +1,17 @@
 <?php
-session_start(); // Iniciar la sesión para acceder a las variables de sesión
-
 // Verificar si el proveedor está autenticado
 if(!isset($_SESSION["idProveedor"])){
-    header("Location: iniciarSesion.php"); // Redirigir a la página de inicio de sesión si no está autenticado
+    header("Location: ?pid=" . base64_encode("presentacion/iniciarSesion.php")); // Redirigir a la página de inicio de sesión si no está autenticado
 }
 
 $id = $_SESSION["idProveedor"]; // Obtener el ID del proveedor de la sesión
-require("logica/Persona.php"); // Incluir la clase Persona
-require("logica/Proveedor.php"); // Incluir la clase Proveedor
 
 $proveedor = new Proveedor($id); // Crear un objeto Proveedor con el ID del proveedor
 $proveedor->consultar(); // Consultar la información del proveedor
 ?>
 <html>
-<head>
-    <!-- Enlazar Bootstrap CSS y JS para el diseño -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</head>
 <body>
-    <?php include("encabezado.php"); ?> <!-- Incluir el encabezado de la página -->
+    <?php include("presentacion/encabezado.php"); ?> <!-- Incluir el encabezado de la página -->
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
@@ -34,7 +25,7 @@ $proveedor->consultar(); // Consultar la información del proveedor
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Evento</a>
                         <ul class="dropdown-menu">
-                            <li><a class='dropdown-item' href='agregarEvento.php'>Nuevo Evento</a></li> <!-- Enlace para agregar un nuevo evento -->
+                            <li><a class='dropdown-item' href="?pid=<?php echo base64_encode("presentacion/evento/agregarEvento.php")?>">Nuevo Evento</a></li> <!-- Enlace para agregar un nuevo evento -->
                         </ul>
                     </li>
                 </ul>
@@ -44,7 +35,7 @@ $proveedor->consultar(); // Consultar la información del proveedor
                             <?php echo $proveedor->getNombre() ?> <!-- Mostrar el nombre del proveedor autenticado -->
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class='dropdown-item' href='index.php?cerrarSesion=true'>Cerrar Sesion</a></li> <!-- Enlace para cerrar sesión -->
+                            <li><a class='dropdown-item' href='?cerrarSesion=true'>Cerrar Sesion</a></li> <!-- Enlace para cerrar sesión -->
                         </ul>
                     </li>
                 </ul>			

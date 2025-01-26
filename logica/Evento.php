@@ -1,6 +1,6 @@
 <?php
 require_once("./persistencia/Conexion.php");
-require("./persistencia/EventoDAO.php");
+require_once("./persistencia/EventoDAO.php");
 
 // La clase Evento representa un evento con sus respectivos atributos y métodos para la manipulación en la base de datos
 class Evento

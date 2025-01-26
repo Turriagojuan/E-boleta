@@ -1,7 +1,8 @@
 <?php
-require_once ("./persistencia/Conexion.php");
-require_once ("./logica/Persona.php");
-require ("./persistencia/ClienteDAO.php");
+require_once(__DIR__ . "/../persistencia/Conexion.php");
+require_once(__DIR__ . "/Persona.php");
+require_once(__DIR__ . "/../persistencia/ClienteDAO.php");
+
 
 // La clase Cliente extiende la clase Persona y representa a un cliente en el sistema
 class Cliente extends Persona {

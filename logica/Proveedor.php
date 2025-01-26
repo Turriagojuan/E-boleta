@@ -1,8 +1,9 @@
 <?php
-require_once ("./persistencia/Conexion.php");
-require_once ("./logica/Persona.php");
-require_once ("./persistencia/ProveedorDAO.php");
-require_once("./logica/Categoria.php");
+require_once(__DIR__ . "/../persistencia/Conexion.php");
+require_once(__DIR__ . "/Persona.php");
+require_once(__DIR__ . "/../persistencia/ProveedorDAO.php");
+require_once(__DIR__ . "/Categoria.php");
+
 
 // La clase Proveedor extiende la clase Persona y representa a un proveedor con la capacidad de gestionar eventos.
 class Proveedor extends Persona {

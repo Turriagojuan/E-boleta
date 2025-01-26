@@ -1,15 +1,7 @@
 <?php
-// Importa las clases necesarias para manejar boletas, eventos y facturas
-require("logica/Boleta.php");
-require("logica/Evento.php");
-require("logica/Factura.php");
-
-// Inicia la sesión para acceder a los datos del cliente
-session_start();
-
 // Verifica si el usuario ha iniciado sesión; si no, redirige a la página de inicio de sesión
 if (!isset($_SESSION['idCliente'])) {
-    header("Location: iniciarSesion.php");
+    header("Location: ?pid=" . base64_encode("presentacion/iniciarSesion.php"));
     exit();
 }
 
@@ -36,6 +28,6 @@ for ($i = 0; $i < $cantidad; $i++) {
 }
 
 // Redirige a la página de confirmación de compra con el ID de la factura generada
-header("Location: confirmacionCompra.php?idFactura=" .  $idFactura);
+header("Location: ?pid=" . base64_encode("presentacion/compra/confirmacionCompra.php") . "&idFactura=" .  $idFactura);
 exit();
 ?>

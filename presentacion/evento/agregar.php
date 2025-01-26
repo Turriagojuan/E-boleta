@@ -1,10 +1,7 @@
 <?php
-session_start(); // Iniciar la sesión para acceder a las variables de sesión
-require_once('logica/Proveedor.php'); // Incluir la clase Proveedor
-
 // Verificar si el proveedor está autenticado
 if (!isset($_SESSION['idProveedor'])) {
-    header('Location: iniciarSesion.php'); // Redirigir a la página de inicio de sesión si no está autenticado
+    header("Location: ?pid=" . base64_encode("presentacion/iniciarSesion.php")); // Redirigir a la página de inicio de sesión si no está autenticado
     exit();
 }
 
@@ -62,10 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Llamada al método procesarEvento para manejar la lógica
     if (procesarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $precio, $idCategoria, $proveedor)) {
         // Si el evento fue agregado exitosamente, redirigir con mensaje de éxito
-        header('Location: sesionProveedor.php?mensaje=eventoAgregado');
+        header("Location: ?pid=" . base64_encode("presentacion/proveedor/sesionProveedor.php") . "&mensaje=eventoAgregado");
     } else {
         // Si ocurrió un error, redirigir con un mensaje de error
-        header('Location: agregarEvento.php?error=NoSePudoAgregarEvento');
+        header("Location: ?pid=" . base64_encode("presentacion/proveedor/sesionProveedor.php") . "&error=NoSePudoAgregarEvento");
     }
 }
 ?>

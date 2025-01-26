@@ -1,16 +1,7 @@
 <?php
-// Inicia la sesión para acceder a los datos del cliente
-session_start();
-
-// Importa las clases necesarias para manejar facturas, boletas, eventos y clientes
-require("logica/Factura.php");
-require("logica/Boleta.php");
-require("logica/Evento.php");
-require("logica/Cliente.php");
-
 // Verifica si el usuario ha iniciado sesión; si no, redirige a la página de inicio de sesión
 if (!isset($_SESSION['idCliente'])) {
-    header("Location: iniciarSesion.php");
+    header("Location: ?pid=" . base64_encode("presentacion/iniciarSesion.php"));
     exit();
 }
 
@@ -48,7 +39,7 @@ $boletas = $boleta->consultarPorFactura($idFactura); // Obtiene las boletas rela
 </head>
 
 <body>
-    <?php include("encabezado.php"); ?> <!-- Incluye el encabezado de la página -->
+    <?php include("presentacion/encabezado.php"); ?>
     
     <div class="container mt-5">
         <div class="row">
@@ -101,7 +92,7 @@ $boletas = $boleta->consultarPorFactura($idFactura); // Obtiene las boletas rela
         <div class="row mt-3">
             <div class="col">
                 <!-- Botón para volver al inicio -->
-                <a href="index.php" class="btn btn-primary">Volver al Inicio</a>
+                <a href="?" class="btn btn-primary">Volver al Inicio</a>
             </div>
         </div>
     </div>

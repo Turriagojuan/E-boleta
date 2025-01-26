@@ -1,17 +1,11 @@
 <?php
-// Inicia la sesión
-session_start();
-
 // Verifica si el proveedor ha iniciado sesión; si no, redirige a la página de inicio de sesión
 if (!isset($_SESSION["idProveedor"])) {
-    header("Location: iniciarSesion.php");
+    header("Location: ?pid=" . base64_encode("presentacion/iniciarSesion.php"));
 }
 
 // Obtiene el ID del proveedor desde la sesión
 $id = $_SESSION["idProveedor"];
-
-// Incluye la clase Proveedor para manejar la lógica relacionada
-require("logica/Proveedor.php");
 
 // Crea una instancia de la clase Proveedor con el ID del proveedor actual
 $proveedor = new Proveedor($id);
@@ -21,20 +15,14 @@ $proveedor->consultar();
 ?>
 
 <html>
-<head>
-    <!-- Carga el CSS de Bootstrap para estilos -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Carga el JavaScript de Bootstrap para funcionalidades -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</head>
 <body>
     <!-- Incluye el encabezado común en todas las páginas -->
-    <?php include("encabezado.php"); ?>
+    <?php include("presentacion/encabezado.php"); ?>
 
     <div class="container mt-5">
         <h2>Agregar Nuevo Evento</h2>
         <!-- Formulario para agregar un nuevo evento -->
-        <form action="agregar.php" method="POST">
+        <form action="?pid=<?php echo base64_encode("presentacion/evento/agregar.php")?>" method="POST">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre del Evento</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" required>
