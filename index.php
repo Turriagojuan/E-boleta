@@ -21,6 +21,7 @@ $paginasSinSesion = array(
     "presentacion/iniciarSesion.php",
     "presentacion/sinPermiso.php",
     "presentacion/evento/detalleEvento.php",
+    "presentacion/cliente/registrarCliente.php",
 );
 
 $paginasConSesion = array(

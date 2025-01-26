@@ -47,5 +47,20 @@ class Cliente extends Persona {
             return true;
         }
     }
+
+    // Método para registrar un nuevo cliente en el sistema
+    public function registrar() {
+        $conexion = new Conexion();
+        $conexion->abrirConexion();
+        
+        // Crea una instancia de ClienteDAO con los datos del cliente
+        $clienteDAO = new ClienteDAO(null, $this->nombre, $this->correo, $this->telefono, $this->direccion, $this->clave);
+        
+        // Ejecuta la consulta de registro
+        $resultado = $conexion->ejecutarConsulta($clienteDAO->registrar());
+        
+        $conexion->cerrarConexion();
+        return $resultado;
+    }
     
 }

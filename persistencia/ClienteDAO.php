@@ -32,6 +32,12 @@ class ClienteDAO {
                 FROM Cliente
                 WHERE idCliente = '" . $this->idPersona . "'";
     }
+
+    // Retorna la consulta SQL para registrar un nuevo cliente
+    public function registrar() {
+        return "INSERT INTO Cliente (nombre, correo, telefono, direccion, clave)
+                VALUES ('" . $this->nombre . "', '" . $this->correo . "', '" . $this->telefono . "', '" . $this->direccion . "', '" . $this->clave . "')";
+    }
 }
 
 ?>

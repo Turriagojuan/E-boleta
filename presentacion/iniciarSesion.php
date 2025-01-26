@@ -63,6 +63,9 @@ if (isset($_POST["autenticar"])) {
                                 </div>    
                             <?php } ?>
                         </form>
+                        <div class="mt-3">
+                            <a href="?pid=<?php echo base64_encode("presentacion/cliente/registrarCliente.php")?>">Registrar nuevo cliente</a> <!-- Enlace al formulario de registro -->
+                        </div>
                     </div>
                 </div>
             </div>
