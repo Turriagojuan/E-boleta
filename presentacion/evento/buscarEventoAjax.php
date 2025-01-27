@@ -10,7 +10,7 @@ $eventos = $evento -> buscar($filtro);
 			if(count($eventos) > 0){
                 echo "<table class='table table-striped table-hover'>";
 				echo "<tr>";
-				echo "<th>Marca</th>";
+				echo "<th>Categoria</th>";
 				echo "<th>Nombre</th>";
 				echo "<th>Cantidad</th>";
 				echo "<th>Precio</th>";
@@ -20,7 +20,7 @@ $eventos = $evento -> buscar($filtro);
 				
 				foreach ($eventos as $eventoActual){
 				    echo "<tr>";
-				    echo "<td>" . $eventoActual -> getMarca() -> getNombre() . "</td>";
+				    echo "<td>" . $eventoActual -> getCategoria() -> getNombre() . "</td>";
 				    echo "<td>" . str_ireplace($filtro, "<strong>" . substr($eventoActual -> getNombre(), stripos($eventoActual -> getNombre(), $filtro), strlen($filtro)) . "</strong>", $eventoActual -> getNombre()) . "</td>";
 				    echo "<td>" . $eventoActual -> getCantidad() . "</td>";
 				    echo "<td>" . $eventoActual -> getPrecioVenta() . "</td>";

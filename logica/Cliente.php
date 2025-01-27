@@ -43,7 +43,7 @@ class Cliente extends Persona {
         $conexion->ejecutarConsulta($clienteDAO->registrar());
         $this->idPersona = $conexion->obtenerLlaveAutonumerica();
         $conexion->cerrarConexion();
-        echo $this->idPersona;
+        $this->idPersona;
     }
   
     
