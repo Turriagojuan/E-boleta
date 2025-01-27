@@ -1,10 +1,5 @@
 <?php
-/*
-require_once ("./persistencia/Conexion.php");
-require_once ("./logica/Persona.php");
-require_once ("./persistencia/ProveedorDAO.php");
-require_once("./logica/Categoria.php");
-*/
+
 // La clase Proveedor extiende la clase Persona y representa a un proveedor con la capacidad de gestionar eventos.
 class Proveedor extends Persona {
     private $eventos;

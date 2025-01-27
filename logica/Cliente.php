@@ -1,6 +1,4 @@
 <?php
-//require_once 'Persona.php';
-
 // La clase Cliente extiende la clase Persona y representa a un cliente en el sistema
 class Cliente extends Persona {
 

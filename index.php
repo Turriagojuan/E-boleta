@@ -6,18 +6,21 @@ if(isset($_GET["cerrarSesion"])){
 
 // Incluir las clases necesarias para la lógica de negocio
 require("logica/Evento.php");
-require ("logica/Persona.php");
+require("logica/Persona.php");
 require("logica/Boleta.php");
 require("logica/Categoria.php");
 require("logica/Factura.php");
-require ("logica/Cliente.php");
+require("logica/Cliente.php");
 require("logica/Proveedor.php");
 
 $paginasSinSesion = array(
     "presentacion/iniciarSesion.php",
-    "presentacion/cliente/registrarCliente.php",
     "presentacion/sinPermiso.php",
+    "presentacion/evento/detalleEvento.php",
+    "presentacion/cliente/registrarCliente.php",
 );
+
+
 
 $paginasConSesion = array(
     "presentacion/sesionProveedor.php",

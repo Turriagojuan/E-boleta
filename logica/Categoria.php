@@ -1,9 +1,8 @@
 <?php
-require_once ("./persistencia/Conexion.php");
-require ("./persistencia/CategoriaDAO.php");
+require_once(__DIR__ . "/../persistencia/Conexion.php");
+require_once(__DIR__ . "/../persistencia/CategoriaDAO.php");
 
-class Categoria
-{
+class Categoria {
     // Atributo privado: Identificador único de la categoría
     private $idCategoria;
     
@@ -11,40 +10,33 @@ class Categoria
     private $nombre;
 
     // Getter para obtener el nombre de la categoría
-    public function getNombre()
-    {
+    public function getNombre() {
         return $this->nombre;
     }
 
     // Setter para asignar el nombre de la categoría
-    public function setNombre($nombre)
-    {
+    public function setNombre($nombre) {
         $this->nombre = $nombre;
     }
 
     // Getter para obtener el identificador de la categoría
-    public function getIdCategoria()
-    {
+    public function getIdCategoria() {
         return $this->idCategoria;
     }
 
     // Setter para asignar el identificador de la categoría
-    public function setIdCategoria($idCategoria)
-    {
+    public function setIdCategoria($idCategoria) {
         $this->idCategoria = $idCategoria;
     }
 
     // Constructor de la clase Categoria
-
-    public function __construct($idCategoria = 0, $nombre = "")
-    {
+    public function __construct($idCategoria = 0, $nombre = "") {
         $this->idCategoria = $idCategoria;
         $this->nombre = $nombre;
     }
 
     // Método para consultar todas las categorías de la base de datos
-
-    public function consultarTodos(){
+    public function consultarTodos() {
         $categorias = array();
         $conexion = new Conexion();
         $conexion->abrirConexion();
@@ -54,7 +46,7 @@ class Categoria
         $conexion->ejecutarConsulta($categoriaDAO->consultarTodos());
         
         // Crea y almacena objetos Categoria a partir de los registros obtenidos
-        while($registro = $conexion->siguienteRegistro()){
+        while($registro = $conexion->siguienteRegistro()) {
             $categoria = new Categoria($registro[0], $registro[1]);
             array_push($categorias, $categoria);
         }
@@ -64,7 +56,7 @@ class Categoria
     }
 
     // Método para consultar una categoría específica en la base de datos
-    public function consultar(){
+    public function consultar() {
         $conexion = new Conexion();
         $conexion->abrirConexion();
         

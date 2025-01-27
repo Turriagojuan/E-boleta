@@ -1,6 +1,6 @@
 <?php
 require_once("./persistencia/Conexion.php");
-require("./persistencia/EventoDAO.php");
+require_once("./persistencia/EventoDAO.php");
 
 class Evento
 {
