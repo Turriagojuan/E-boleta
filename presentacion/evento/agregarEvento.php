@@ -1,16 +1,12 @@
 <?php
 // Verifica si el proveedor ha iniciado sesión; si no, redirige a la página de inicio de sesión
-if (!isset($_SESSION["idProveedor"])) {
-    header("Location: ?pid=" . base64_encode("presentacion/iniciarSesion.php"));
+$rol = $_SESSION["rol"];
+if($rol != "P"){
+    header("Location: ?pid=" . base64_encode("presentacion/sinPermiso.php"));    
 }
 
-// Obtiene el ID del proveedor desde la sesión
 $id = $_SESSION["idProveedor"];
-
-// Crea una instancia de la clase Proveedor con el ID del proveedor actual
 $proveedor = new Proveedor($id);
-
-// Consulta la información del proveedor
 $proveedor->consultar();
 ?>
 
@@ -46,6 +42,10 @@ $proveedor->consultar();
             <div class="mb-3">
                 <label for="hora" class="form-label">Hora</label>
                 <input type="time" class="form-control" id="hora" name="hora" required>
+            </div>
+            <div class="mb-3">
+                <label for="imagen" class="form-label">Imagen</label>
+                <textarea class="form-control" id="imagen" name="imagen" rows="3" required></textarea>
             </div>
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripción</label>

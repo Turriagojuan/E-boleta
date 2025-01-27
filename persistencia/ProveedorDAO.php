@@ -30,6 +30,22 @@ class ProveedorDAO{
                 from Proveedor
                 where idProveedor = '" . $this -> idPersona . "'";
     }
+    public function agregarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $precio, $idCategoria) {
+        return "INSERT INTO Evento (nombre, aforo, ciudad, direccion, fecha, hora, descripcion, precio, idCategoria, idProveedor)
+                VALUES (
+                    '" . $nombre . "',
+                    " . $aforo . ",
+                    '" . $ciudad . "',
+                    '" . $direccion . "',
+                    '" . $fecha . "',
+                    '" . $hora . "',
+                    '" . $descripcion . "',
+                    " . $precio . ",
+                    " . $idCategoria . ",
+                    " . $this->idPersona . "
+                )";
+    }
 }
+
 
 ?>

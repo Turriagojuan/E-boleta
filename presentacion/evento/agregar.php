@@ -1,15 +1,15 @@
 <?php
-// Verificar si el proveedor está autenticado
-if (!isset($_SESSION['idProveedor'])) {
-    header("Location: ?pid=" . base64_encode("presentacion/iniciarSesion.php")); // Redirigir a la página de inicio de sesión si no está autenticado
-    exit();
+
+$rol = $_SESSION["rol"];
+if($rol != "P"){
+    header("Location: ?pid=" . base64_encode("presentacion/sinPermiso.php"));    
 }
 
 $idProveedor = $_SESSION['idProveedor']; // Obtener el ID del proveedor de la sesión
 $proveedor = new Proveedor($idProveedor); // Crear una instancia del proveedor
 
 // Función para procesar el evento
-function procesarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $precio, $idCategoria, $proveedor) {
+function procesarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $precio, $proveedor, $idCategoria) {
     // Validar que los campos requeridos no estén vacíos
     if (empty($nombre) || empty($aforo) || empty($ciudad) || empty($direccion) || empty($fecha) || empty($hora) || empty($idCategoria) || empty($precio)) {
         return false; // Algún campo requerido está vacío

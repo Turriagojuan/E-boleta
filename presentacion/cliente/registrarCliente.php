@@ -44,7 +44,7 @@ include ("presentacion/encabezado.php")?>
 						<?php if($error){ ?>
                         <div class="alert alert-danger mt-3"
 							role="alert">Error al registrar</div>    
-						<?php } ?>
+						<?php }  ?>
 					</form>
 				</div>
 			</div>

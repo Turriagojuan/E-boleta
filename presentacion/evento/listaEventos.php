@@ -19,14 +19,15 @@
                         echo "<div class='card text-bg-light'>";
                         echo "<div class='card-body'>";
                         echo "<div class='text-center'><img src='https://icons.iconarchive.com/icons/icons8/ios7/256/Time-And-Date-Meeting-icon.png' width='70%' /></div>";
-                        echo "<a href='?pid=" . base64_encode("presentacion/evento/detalleEvento.php") . "&idEvento=" . $eventoActual->getIdEvento() . "'>" . $eventoActual->getNombre() . "</a><br>";
-                        echo "Ciudad: " . $eventoActual->getCiudad() . "<br>";
-                        echo "Fecha: " . $eventoActual->getFecha() . "<br>";
-                        echo "Categoría: " . $eventoActual->getCategoria()->getNombre() . "<br>";
+                        echo "<a href='?pid=" . base64_encode("presentacion/evento/detalleEvento.php") . "'>";
+                        echo htmlspecialchars($eventoActual->getNombre()) . "</a><br>";
+                        echo "Ciudad: " . htmlspecialchars($eventoActual->getCiudad()) . "<br>";
+                        echo "Fecha: " . htmlspecialchars($eventoActual->getFecha()) . "<br>";
+                        echo "Categoría: " . htmlspecialchars($eventoActual->getCategoria()->getNombre()) . "<br>";
                         echo "</div>";
                         echo "</div>";
                         echo "</div>";
-
+                    
                         if ($i % 4 == 3) {
                             echo "</div>"; // Cerrar la fila después de 4 eventos
                         }
@@ -34,7 +35,7 @@
                     }
                     if ($i % 4 != 0) {
                         echo "</div>"; // Cerrar la última fila si no está completa
-                    }
+                    }                    
                     ?>
                 </div>
             </div>
