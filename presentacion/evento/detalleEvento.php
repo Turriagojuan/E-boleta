@@ -1,6 +1,6 @@
 <?php
 // Incluye la clase Evento para manejar la lógica relacionada con eventos
-require_once("logica/Evento.php");
+require("./logica/Evento.php");
 
 // Obtiene el idEvento de la URL mediante el método GET
 $idEvento = $_GET['idEvento'];
@@ -39,7 +39,7 @@ $evento->consultar();
     </script>
 </head>
 <body>
-    <?php include("presentacion/encabezado.php"); ?> <!-- Incluye el encabezado común en todas las páginas -->
+    <?php include("encabezado.php"); ?> <!-- Incluye el encabezado común en todas las páginas -->
 
     <div class="container mt-5">
         <div class="row mb-3">
@@ -57,7 +57,7 @@ $evento->consultar();
                         <h5>Selecciona una cantidad y compra tus boletas</h5>
                         
                         <!-- Formulario para comprar boletos -->
-                        <form action="?pid=<?php echo base64_encode("presentacion/compra/comprarBoletas.php")?>" method="POST">
+                        <form action="comprarBoletas.php" method="POST">
                             <input type="hidden" name="idEvento" value="<?php echo $idEvento; ?>" /> <!-- Campo oculto para el ID del evento -->
                             <div class="mb-3">
                                 <label for="cantidad" class="form-label">Cantidad de boletas</label>

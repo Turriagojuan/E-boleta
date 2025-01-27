@@ -38,7 +38,7 @@ class EventoDAO
     
     // Método para consultar un evento por su ID
     public function consultar() {
-        return "SELECT nombre, aforo, ciudad, direccion, fecha, hora, descripcion, precio, imagen 
+        return "SELECT nombre, aforo, ciudad, direccion, fecha, hora, descripcion, precio 
                 FROM Evento 
                 WHERE idEvento = '" . $this->idEvento . "'";
     }

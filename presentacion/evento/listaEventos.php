@@ -3,7 +3,7 @@
         <div class="col">
             <div class="card border-primary">
                 <div class="card-header text-bg-info">
-                    <h4>Eventos</h4> <!-- Título de la sección de eventos -->
+                    <h4>Eventos </h4> <!-- Título de la sección de eventos -->
                 </div>
                 <div class="card-body">
                     <?php
