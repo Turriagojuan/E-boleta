@@ -29,6 +29,9 @@ $paginasConSesion = array(
     "presentacion/evento/agregarEvento.php",
     "presentacion/evento/agregar.php",
     "presentacion/compra/comprarBoletas.php",
+    "presentacion/compra/verCarrito.php",
+    "presentacion/compra/comprarCarrito.php",
+    "presentacion/compra/eliminarDelCarrito.php",
     "presentacion/compra/confirmacionCompra.php",
 );
 
@@ -58,7 +61,7 @@ else {
     if (in_array($pid, $paginasSinSesion)) {
         include($pid);
     } else if (in_array($pid, $paginasConSesion)) {
-        if (isset($_SESSION["idProveedor"])) {
+        if (isset($_SESSION["idProveedor"]) or isset($_SESSION["idCliente"])) {
             include($pid);
         } else {
             include("presentacion/iniciarSesion.php");
