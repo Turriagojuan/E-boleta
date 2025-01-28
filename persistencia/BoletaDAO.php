@@ -32,4 +32,11 @@ class BoletaDAO {
                 INNER JOIN factura_boleta fb ON fb.Boleta_idBoleta = b.idBoleta
                 WHERE fb.Factura_idFactura = " . $idFactura;
     }
+    public function ventasPorEvento() {
+        return "SELECT e.nombre AS evento, COUNT(b.idBoleta) AS total_boletas
+                FROM evento e
+                LEFT JOIN boleta b ON b.Evento_idEvento = e.idEvento
+                GROUP BY e.nombre";
+    }
+    
 }

@@ -16,7 +16,6 @@ require("logica/Proveedor.php");
 $paginasSinSesion = array(
     "presentacion/iniciarSesion.php",
     "presentacion/sinPermiso.php",
-    "presentacion/evento/detalleEvento.php",
     "presentacion/cliente/registrarCliente.php",
 );
 
@@ -30,11 +29,17 @@ $paginasConSesion = array(
     "presentacion/evento/buscarEvento.php",
     "presentacion/evento/editarEvento.php",
     "presentacion/evento/editarEventoimagen.php",
-    "presentacion/evento/graficaEventos.php"
+    "presentacion/evento/graficaEventos.php",
+    "presentacion/cliente/comprarBoletas.php",
+    "presentacion/compra/confirmacionCompra.php",
+    "presentacion/evento/detalleEvento.php",
+    "presentacion/evento/reporteEventos.php",
+    "presentacion/evento/graficaEstadisticasVentas.php",
+
     
 );  
 $paginasPDF = array(
-    "presentacion/producto/reporteEventos.php",
+    "presentacion/evento/reporteEventos.php",
 );
 
 if(isset($_GET["pid"]) && in_array(base64_decode($_GET["pid"]), $paginasPDF)){

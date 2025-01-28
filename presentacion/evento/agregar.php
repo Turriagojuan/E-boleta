@@ -5,11 +5,11 @@ if($rol != "P"){
     header("Location: ?pid=" . base64_encode("presentacion/sinPermiso.php"));    
 }
 
-$idProveedor = $_SESSION['idProveedor']; // Obtener el ID del proveedor de la sesión
+$idProveedor = $_SESSION['id']; // Obtener el ID del proveedor de la sesión
 $proveedor = new Proveedor($idProveedor); // Crear una instancia del proveedor
 
 // Función para procesar el evento
-function procesarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $precio, $proveedor, $idCategoria) {
+function procesarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $precio, $idCategoria, $proveedor) {
     // Validar que los campos requeridos no estén vacíos
     if (empty($nombre) || empty($aforo) || empty($ciudad) || empty($direccion) || empty($fecha) || empty($hora) || empty($idCategoria) || empty($precio)) {
         return false; // Algún campo requerido está vacío
@@ -26,9 +26,11 @@ function procesarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $de
         return true; // El evento fue agregado exitosamente
     } catch (Exception $e) {
         // Manejo de errores (podrías logear el error para depuración)
+        echo "<p1>$e</1p>";
         return false; // Ocurrió un error al agregar el evento
     }
 }
+
 
 // Verificar si se envió el formulario
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -59,10 +61,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Llamada al método procesarEvento para manejar la lógica
     if (procesarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $precio, $idCategoria, $proveedor)) {
         // Si el evento fue agregado exitosamente, redirigir con mensaje de éxito
-        header("Location: ?pid=" . base64_encode("presentacion/proveedor/sesionProveedor.php") . "&mensaje=eventoAgregado");
+        header("Location: ?pid=" . base64_encode("presentacion/sesionProveedor.php") . "&mensaje=eventoAgregado");
     } else {
         // Si ocurrió un error, redirigir con un mensaje de error
-        header("Location: ?pid=" . base64_encode("presentacion/proveedor/sesionProveedor.php") . "&error=NoSePudoAgregarEvento");
+        header("Location: ?pid=" . base64_encode("presentacion/sesionProveedor.php") . "&mensaje=NoSePudoAgregarEvento");
     }
+    
 }
 ?>

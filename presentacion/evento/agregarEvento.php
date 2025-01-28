@@ -5,7 +5,7 @@ if($rol != "P"){
     header("Location: ?pid=" . base64_encode("presentacion/sinPermiso.php"));    
 }
 
-$id = $_SESSION["idProveedor"];
+$id = $_SESSION["id"];
 $proveedor = new Proveedor($id);
 $proveedor->consultar();
 ?>
@@ -18,6 +18,7 @@ $proveedor->consultar();
     <div class="container mt-5">
         <h2>Agregar Nuevo Evento</h2>
         <!-- Formulario para agregar un nuevo evento -->
+
         <form action="?pid=<?php echo base64_encode("presentacion/evento/agregar.php")?>" method="POST">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre del Evento</label>
@@ -42,10 +43,6 @@ $proveedor->consultar();
             <div class="mb-3">
                 <label for="hora" class="form-label">Hora</label>
                 <input type="time" class="form-control" id="hora" name="hora" required>
-            </div>
-            <div class="mb-3">
-                <label for="imagen" class="form-label">Imagen</label>
-                <textarea class="form-control" id="imagen" name="imagen" rows="3" required></textarea>
             </div>
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripción</label>

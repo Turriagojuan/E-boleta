@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
 	<div class="container">
-		<a class="navbar-brand" href="#"><img src="img/logo2.png" width="50" /></a>
+		<a class="navbar-brand" href="#"><img src="img/logo.png" width="50" /></a>
 		<button class="navbar-toggler" type="button"
 			data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
 			aria-controls="navbarNavDropdown" aria-expanded="false"

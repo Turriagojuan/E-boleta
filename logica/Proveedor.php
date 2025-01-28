@@ -54,12 +54,14 @@ class Proveedor extends Persona {
 
     // Agrega un nuevo evento asociado al proveedor en la base de datos
 
-    public function agregarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $precio,$imagen , $idCategoria) {
+    public function agregarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $precio, $idCategoria) {
         $conexion = new Conexion();
         $conexion->abrirConexion();
         $proveedorDAO = new ProveedorDAO($this->idPersona);
-        $consulta = $proveedorDAO->agregarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $precio, null , $idCategoria);
+        $consulta = $proveedorDAO->agregarEvento($nombre, $aforo, $ciudad, $direccion, $fecha, $hora, $descripcion, $precio, $idCategoria);
+
         $conexion->ejecutarConsulta($consulta);
         $conexion->cerrarConexion();
+        
     }
 }

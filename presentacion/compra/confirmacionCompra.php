@@ -1,8 +1,12 @@
 <?php
+
+// Importa las clases necesarias para manejar facturas, boletas, eventos y clientes
+$id = base64_decode($_GET["id"]);
+$rol = base64_decode($_GET["rol"]);
+
 // Verifica si el usuario ha iniciado sesión; si no, redirige a la página de inicio de sesión
-if (!isset($_SESSION['idCliente'])) {
-    header("Location: ?pid=" . base64_encode("presentacion/iniciarSesion.php"));
-    exit();
+if($rol != "C"){
+    header("Location: ?pid=" . base64_encode("presentacion/sinPermiso.php"));
 }
 
 // Obtiene el ID de la factura a partir de la URL
@@ -13,7 +17,7 @@ $factura = new Factura($idFactura);
 $factura->consultar(); // Llama al método para cargar los datos de la factura
 
 // Consultar la información del cliente utilizando el ID almacenado en la sesión
-$cliente = new Cliente($_SESSION['idCliente']);
+$cliente = new Cliente($id);
 $cliente->consultar(); // Llama al método para cargar los datos del cliente
 
 // Consultar el evento asociado a la factura
@@ -30,16 +34,11 @@ $boletas = $boleta->consultarPorFactura($idFactura); // Obtiene las boletas rela
 <html lang="es">
 
 <head>
-    <!-- Incluye Bootstrap para el estilo de la página -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirmación de Compra</title>
+
 </head>
 
 <body>
-    <?php include("presentacion/encabezado.php"); ?>
+    <?php include("presentacion/encabezado.php"); ?> <!-- Incluye el encabezado de la página -->
     
     <div class="container mt-5">
         <div class="row">
@@ -90,11 +89,12 @@ $boletas = $boleta->consultarPorFactura($idFactura); // Obtiene las boletas rela
         </div>
 
         <div class="row mt-3">
-            <div class="col">
-                <!-- Botón para volver al inicio -->
-                <a href="?" class="btn btn-primary">Volver al Inicio</a>
-            </div>
-        </div>
+    <div class="col">
+        <!-- Botón para volver al inicio -->
+        <a href="?pid=<?php echo base64_encode('presentacion/sesionCliente.php'); ?>" class="btn btn-primary">Volver al Inicio</a>
+    </div>
+</div>
+
     </div>
 </body>
 

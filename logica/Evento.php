@@ -147,15 +147,14 @@ class Evento
         $registro = $conexion->siguienteRegistro();
 
         if ($registro != null) {
-            $this->nombre = $registro[1];
-            $this->aforo = $registro[2];
-            $this->ciudad = $registro[3];
-            $this->direccion = $registro[4];
-            $this->fecha = $registro[5];
-            $this->hora = $registro[6];
-            $this->descripcion = $registro[7];
-            $this->precio = $registro[8];
-
+            $this->nombre = $registro[0];
+            $this->aforo = $registro[1];
+            $this->ciudad = $registro[2];
+            $this->direccion = $registro[3];
+            $this->fecha = $registro[4];
+            $this->hora = $registro[5];
+            $this->descripcion = $registro[6];
+            $this->precio = $registro[7];
         }
         
         $conexion->cerrarConexion();

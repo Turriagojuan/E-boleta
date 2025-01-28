@@ -17,9 +17,11 @@ include ("presentacion/menuCliente.php");
 					<h4>Sesion Cliente</h4>
 				</div>
 				<div class="card-body">
-					<p>Bienvenido cliente <?php echo $cliente -> getNombre() ?></p>
-				</div>
+					<p>Bienvenido <?php echo $cliente -> getNombre() ?></p>
+				</div>	
 			</div>
+
 		</div>
 	</div>
 </div>
+<?php include ("presentacion/evento/consultarEventoInicio.php");    

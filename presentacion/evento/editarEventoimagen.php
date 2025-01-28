@@ -20,9 +20,9 @@ if(isset($_POST["editar"])){
                 unlink($rutaServidor . $evento -> getImagen());
             }
             copy($rutaLocal, $rutaServidor . $nombreImagen);
-            $evento = new Evento($_GET["idEvento"], "", 0, 0, 0, $nombreImagen);
+            $evento = new Evento($_GET["idEvento"], "", 0, "", "","","","",0, $nombreImagen);
             $evento -> editarImagen();
-            
+    
         }else{
             $error = 2;
         }
@@ -34,7 +34,7 @@ if(isset($_POST["editar"])){
 $evento = new Evento($_GET["idEvento"]);
 $evento -> consultar();
 include ("presentacion/encabezado.php");
-include ("presentacion/menuAdministrador.php");
+include ("presentacion/menuProveedor.php");
 ?>
 <div class="container">
 	<div class="row mt-5">
@@ -57,7 +57,7 @@ include ("presentacion/menuAdministrador.php");
     				}    				    
     				?>
 					<form method="post"
-						action="?pid=<?php echo base64_encode("presentacion/evento/editarEventoImagen.php")?>&idEvento=<?php echo $_GET["idEvento"] ?>"
+						action="?pid=<?php echo base64_encode("presentacion/evento/editarEventoimagen.php")?>&idEvento=<?php echo $_GET["idEvento"] ?>"
 						enctype="multipart/form-data">
 						<div class="mb-3">
 							<input type="file" name="imagen" class="form-control"

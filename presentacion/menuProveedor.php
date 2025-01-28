@@ -20,13 +20,14 @@ $proveedor -> consultar();
 					<ul class="dropdown-menu">
                         <li><a class='dropdown-item' href='?pid=<?php echo base64_encode("presentacion/evento/agregarEvento.php")?>'>Nuevo Evento</a></li>
                         <li><a class='dropdown-item' href='?pid=<?php echo base64_encode("presentacion/evento/buscarEvento.php")?>'>Buscar Eventos</a></li>
-                        <li><a class='dropdown-item' href='?pid=<?php echo base64_encode("presentacion/evento/reporteEvento.php")?>'>Reporte de Eventos</a></li>
+                        <li><a class='dropdown-item' href='?pid=<?php echo base64_encode("presentacion/evento/reporteEventos.php")?>'>Reporte de Eventos</a></li>
 					</ul></li>
 				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
 					href="#" role="button" data-bs-toggle="dropdown"
 					aria-expanded="false">Graficas</a>
 					<ul class="dropdown-menu">
-                        <li><a class='dropdown-item' href='?pid=<?php echo base64_encode("presentacion/evento/graficaEventoMarca.php")?>'>Eventos</a></li>
+                        <li><a class='dropdown-item' href='?pid=<?php echo base64_encode("presentacion/evento/graficaEventos.php")?>'>Eventos</a></li>
+						<li><a class='dropdown-item' href='?pid=<?php echo base64_encode("presentacion/evento/graficaEstadisticasVentas.php")?>'>Ventas</a></li>
 					</ul></li>
 			</ul>
 			<ul class="navbar-nav">
