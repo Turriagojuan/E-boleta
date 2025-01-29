@@ -4,7 +4,16 @@ if($rol != "P"){
     header("Location: ?pid=" . base64_encode("presentacion/sinPermiso.php"));
 }
 if(isset($_POST["editar"])){
-    $evento = new Evento($_GET["idEvento"], $_POST["nombre"], $_POST["cantidad"], $_POST["precioCompra"], $_POST["precioVenta"]);
+    $evento = new Evento(
+        $_GET["idEvento"], 
+        $_POST["nombre"], 
+        $_POST["aforo"], 
+        $_POST["ciudad"], 
+        $_POST["direccion"], 
+        $_POST["fecha"], 
+        $_POST["hora"], 
+        $_POST["descripcion"], 
+        $_POST["precio"]);
     $evento -> editar();
 }else{
     $evento = new Evento($_GET["idEvento"]);
@@ -85,3 +94,12 @@ $evento->consultar();
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const formulario = document.querySelector("form");
+
+        formulario.addEventListener("submit", function (event) {
+            alert("El evento ha sido actualizado correctamente.");
+        });
+    });
+</script>

@@ -1,8 +1,12 @@
 <?php
 
 // Obtiene el ID del cliente
-$idCliente = $_SESSION['idCliente'];
+$idCliente = $_SESSION['id'];
 
+$rol = $_SESSION["rol"];
+if($rol != "C"){
+    header("Location: ?pid=" . base64_encode("presentacion/sinPermiso.php"));
+}
 // Verifica si el carrito está vacío
 if (!isset($_SESSION['carrito']) || empty($_SESSION['carrito'])) {
     echo "<h1>El carrito está vacío</h1>";
@@ -48,19 +52,12 @@ $_SESSION['compra_exitosa'] = true;
 // Redirige a la página del carrito
 //header("Location: ?pid=" . base64_encode("presentacion/compra/verCarrito.php"));
 //exit();
+
+echo "<script>
+    // Mostrar mensaje de éxito
+    alert('Compra realizada con éxito. Puede revisar su factura en el menú principal.');
+    
+    // Redirigir al usuario a la página de sesión cliente
+    window.location.href = '?pid=" . base64_encode("presentacion/sesionCliente.php") . "';
+</script>";
 ?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-</head>
-<body>
-<h1>Procesando su compra...</h1>
-
-<?php foreach ($facturas as $idFactura) { ?>
-    <?php echo  $idFactura; ?>
-    <?php echo "<script>window.open('?pid=" . base64_encode("presentacion/compra/confirmacionCompra.php") . "&idFactura=" . $idFactura . "', '_blank');</script>"; ?>
-<?php } ?>
-</script> 
-</body>
-</html>

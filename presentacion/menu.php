@@ -1,7 +1,7 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
 	<div class="container">
-		<a class="navbar-brand" href="#"><img src="img/logo.png" width="50" /></a>
+		<a class="navbar-brand" href="?cerrarSesion=true"><img src="img/logo.png" width="50" /></a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -17,7 +17,7 @@
                         $categoria = new Categoria();
                         $categorias = $categoria->consultarTodos();
                         foreach ($categorias as $categoriaActual) {
-                            echo "<li class='nav-item'><a class='nav-link' href='#' role='button'>" . $categoriaActual->getNombre() . "</a></li>";
+                            echo "<li class='nav-item'><a class='nav-link' href='cerrarSesion=true' role='button'>" . $categoriaActual->getNombre() . "</a></li>";
                         }
                     ?>
                     </ul></li>

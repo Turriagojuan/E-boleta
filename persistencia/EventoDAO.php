@@ -45,9 +45,10 @@ class EventoDAO
     public function editar() {
         return "UPDATE Evento
                 SET nombre = '" . $this->nombre . "', aforo = '" . $this->aforo . "', ciudad = '" . $this->ciudad . "', direccion = '" . $this->direccion . "', 
-                    fecha = '" . $this->fecha . "', hora = '" . $this->hora . "', descripcion = '" . $this->descripcion . "', precio = '" . $this->precio . "'
+                    fecha = '" . $this->fecha . "', hora = '" . $this->hora . "', descripcion = '" . $this->descripcion . "', precio = '" . $this->precio . "'  
                 WHERE idEvento = '" . $this->idEvento . "'";
     }
+    
     public function editarImagen() {
         return "UPDATE Evento
                 SET imagen = '" . $this->imagen . "'

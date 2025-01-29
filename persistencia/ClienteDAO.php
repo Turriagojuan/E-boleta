@@ -28,7 +28,7 @@ class ClienteDAO {
 
     // Retorna la consulta SQL para consultar el nombre y correo de un cliente por su ID
     public function consultar() {
-        return "SELECT nombre, correo
+        return "SELECT nombre, correo, telefono, direccion
                 FROM Cliente
                 WHERE idCliente = '" . $this->idPersona . "'";
     }
@@ -36,6 +36,9 @@ class ClienteDAO {
         return "INSERT INTO Cliente (nombre, correo, telefono, direccion, clave)
                 VALUES ('" . $this->nombre . "', '" . $this->correo . "', '" . $this->telefono . "', '" . $this->direccion . "', '" . $this->clave . "')";
     }
+    public function consultarFactura($idCliente) {
+        return "SELECT idFactura, total, subtotal, iva, fecha, hora, Evento_idEvento FROM factura WHERE Cliente_idCliente = $idCliente";
+ }
     
 }
 

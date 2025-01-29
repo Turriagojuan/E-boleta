@@ -162,7 +162,7 @@ class Evento
     public function editar() {
         $conexion = new Conexion();
         $conexion->abrirConexion();
-        $eventoDAO = new EventoDAO($this->idEvento, $this->nombre, $this->aforo, $this->ciudad, $this->direccion, $this->fecha, $this->hora, $this->descripcion, $this->precio, $this->imagen, $this->categoria);
+        $eventoDAO = new EventoDAO($this->idEvento, $this->nombre, $this->aforo, $this->ciudad, $this->direccion, $this->fecha, $this->hora, $this->descripcion, $this->precio);
         $conexion->ejecutarConsulta($eventoDAO->editar());
         $conexion->cerrarConexion();
     }

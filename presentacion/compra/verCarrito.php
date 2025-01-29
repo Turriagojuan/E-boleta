@@ -1,9 +1,17 @@
 <?php
 // Verifica si el carrito está vacío
-if (!isset($_SESSION['carrito']) || empty($_SESSION['carrito'])) {
-    echo "<h1>El carrito está vacío</h1>";
+$rol = $_SESSION["rol"];
+if($rol != "C"){
+    header("Location: ?pid=" . base64_encode("presentacion/sinPermiso.php"));
 }
-
+if (!isset($_SESSION['carrito']) || empty($_SESSION['carrito'])) {
+    echo "<script>
+        alert('El carrito está vacío');
+        window.location.href='?pid=" . base64_encode("presentacion/sesionCliente.php") . "';
+    </script>";
+}
+elseif((isset($_SESSION['carrito']))){
+    
 // Obtiene el contenido del carrito
 $carrito = $_SESSION['carrito'];
 ?>
@@ -59,6 +67,9 @@ $carrito = $_SESSION['carrito'];
         </table>
         <h3>Total de la Compra: $<?php echo number_format($totalCompra, 2); ?></h3>
         <a href="?pid=<?php echo base64_encode("presentacion/compra/comprarCarrito.php")?>" class="btn btn-primary">Proceder a la Compra</a>
+        <a href="?pid=<?php echo base64_encode('presentacion/sesionCliente.php'); ?>" class="btn btn-primary">Volver al Inicio</a>
     </div>
 </body>
 </html>
+<?php }
+

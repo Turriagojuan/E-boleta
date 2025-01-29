@@ -36,8 +36,7 @@ if ($accion == 'comprar') {
     }
 
     // Redirige a la página de confirmación de compra con el ID de la factura generada
-    header("Location: ?pid=" . base64_encode("presentacion/compra/confirmacionCompra.php") . "&idFactura=" .  $idFactura  . "&id=" . base64_encode($id) . "&rol=" . base64_encode($rol) );
-    exit();
+    header("Location: ?pid=" . base64_encode("presentacion/compra/confirmacionCompra.php") . "&idFactura=" .  $idFactura   );
 } elseif ($accion == 'agregarCarrito') {
     // Agregar al carrito
 
@@ -53,8 +52,9 @@ if ($accion == 'comprar') {
         'nombresUsuarios' => $nombresUsuarios
     ];
 
-    // Redirige a la página del carrito
-    header("Location: ?pid=" . base64_encode("presentacion/compra/verCarrito.php"));
-    exit();
+    echo "<script>
+        alert('Producto agregado correctamente al carrito');
+        window.location.href = '?pid=" . base64_encode('presentacion/sesionCliente.php') . "';
+    </script>";
 }
 ?>

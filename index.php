@@ -2,7 +2,13 @@
 session_start();
 if(isset($_GET["cerrarSesion"])){
     session_destroy();
-}
+}?>
+<script>
+window.onpopstate = function () {
+    window.location.href = "?cerrarSesion=true";
+};
+</script>
+<?php
 
 // Incluir las clases necesarias para la lógica de negocio
 require("logica/Evento.php");
@@ -39,11 +45,13 @@ $paginasConSesion = array(
     "presentacion/evento/detalleEvento.php",
     "presentacion/evento/reporteEventos.php",
     "presentacion/evento/graficaEstadisticasVentas.php",
+    "presentacion/cliente/compras.php"
 
     
 );  
 $paginasPDF = array(
     "presentacion/evento/reporteEventos.php",
+    "presentacion/cliente/generarFactura.php",
 );
 
 if(isset($_GET["pid"]) && in_array(base64_decode($_GET["pid"]), $paginasPDF)){

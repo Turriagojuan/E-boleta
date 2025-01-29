@@ -15,6 +15,8 @@ class Cliente extends Persona {
         $registro = $conexion->siguienteRegistro();
         $this->nombre = $registro[0];
         $this->correo = $registro[1];
+        $this->telefono = $registro[2];
+        $this->direccion = $registro[3];
         $conexion->cerrarConexion();
     }
 
@@ -43,6 +45,17 @@ class Cliente extends Persona {
         $conexion->cerrarConexion();
         $this->idPersona;
     }
-  
+public function consultarFactura($idPersona){
+    $conexion = new Conexion();
+    $conexion->abrirConexion();
+    $clienteDAO = new ClienteDAO();
+    $conexion->ejecutarConsulta($clienteDAO->consultarFactura($idPersona));
+    $facturas = [];
+while ($registro = $conexion->siguienteRegistro()) {
+    $facturas[] = $registro;
+}
+    $conexion->cerrarConexion();
+    return $facturas;
+}
     
 }

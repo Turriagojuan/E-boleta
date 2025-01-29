@@ -18,10 +18,11 @@ include ("presentacion/menuCliente.php");
 				</div>
 				<div class="card-body">
 					<p>Bienvenido <?php echo $cliente -> getNombre() ?></p>
+					
 				</div>	
 			</div>
 
 		</div>
 	</div>
 </div>
-<?php include ("presentacion/evento/consultarEventoInicio.php");    
+<?php include ("presentacion/evento/consultarEventoInicio.php");  

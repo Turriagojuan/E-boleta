@@ -1,8 +1,8 @@
 <?php
 
 // Importa las clases necesarias para manejar facturas, boletas, eventos y clientes
-$id = base64_decode($_GET["id"]);
-$rol = base64_decode($_GET["rol"]);
+$id = $_SESSION["id"];
+$rol = $_SESSION["rol"];
 
 // Verifica si el usuario ha iniciado sesión; si no, redirige a la página de inicio de sesión
 if($rol != "C"){
