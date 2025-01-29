@@ -72,7 +72,8 @@ $evento->consultar();
                             </div>
                             <!-- Aquí se generarán los campos para los nombres de los usuarios -->
                             <div id="contenedorNombres"></div> <!-- Contenedor donde se agregarán dinámicamente los campos de nombres -->
-                            <button type="submit" class="btn btn-primary">Comprar</button> <!-- Botón para enviar el formulario -->
+                            <button type="submit" name="accion" value="comprar" class="btn btn-primary">Comprar</button> <!-- Botón para comprar -->
+                            <button type="submit" name="accion" value="agregarCarrito" class="btn btn-secondary">Agregar al Carrito</button> <!-- Botón para agregar al carrito -->
                         </form>
                     </div>
                 </div>
