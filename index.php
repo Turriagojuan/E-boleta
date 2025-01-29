@@ -45,13 +45,15 @@ $paginasConSesion = array(
     "presentacion/evento/detalleEvento.php",
     "presentacion/evento/reporteEventos.php",
     "presentacion/evento/graficaEstadisticasVentas.php",
-    "presentacion/cliente/compras.php"
+    "presentacion/cliente/compras.php",
+    "presentacion/cliente/boletas.php"
 
     
 );  
 $paginasPDF = array(
     "presentacion/evento/reporteEventos.php",
     "presentacion/cliente/generarFactura.php",
+    "presentacion/cliente/generarBoleta.php",
 );
 
 if(isset($_GET["pid"]) && in_array(base64_decode($_GET["pid"]), $paginasPDF)){

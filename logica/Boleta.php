@@ -108,39 +108,38 @@ class Boleta {
         return $boletas;
     }
     public function obtenerVentasPorEvento() {
-        // Inicializar la conexión
         $conexion = new Conexion();
-        
+        $ventasPorEvento = [];
         try {
             $conexion->abrirConexion();
-    
             $boletaDAO = new BoletaDAO();
             $consulta = $boletaDAO->ventasPorEvento();
-    
-            // Ejecutar la consulta y manejar errores
             $conexion->ejecutarConsulta($consulta);
-    
-            $ventasPorEvento = [];
-            
-            // Almacenar los resultados de la consulta en el array
             while ($registro = $conexion->siguienteRegistro()) {
                 $ventasPorEvento[] = $registro;
             }
-    
             $conexion->cerrarConexion();
-            
-            // Verificar si se obtuvieron resultados
             if (empty($ventasPorEvento)) {
                 throw new Exception('No se encontraron resultados para las ventas por evento.');
             }
-    
             return $ventasPorEvento;
         } catch (Exception $e) {
-            // Captura de errores
             echo 'Error: ' . $e->getMessage();
-            return []; // Devolver un array vacío en caso de error
+            return [];
         }
     }
-    
+    public function consultarBoleta($idCliente) {
+        $conexion = new Conexion();
+        $conexion->abrirConexion();
+        $boletaDAO = new BoletaDAO();
+        $conexion->ejecutarConsulta($boletaDAO->consultarBoleta($idCliente));
+        $boletas = [];
+        while ($registro = $conexion->siguienteRegistro()) {
+            $boletas[] = new Boleta($registro[0], $registro[1], $registro[2], $registro[3]);
+        }
+        $conexion->cerrarConexion();
+        return $boletas;
+    }
+
 
 }

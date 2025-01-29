@@ -4,6 +4,7 @@ class BoletaDAO {
     private $nombreUsuario;
     private $idEvento;
     private $idCliente;
+    private $idBoleta;
 
     // Constructor de la clase BoletaDAO que inicializa los datos necesarios para la creación y consulta de boletas
     public function __construct($nombreUsuario = "", $idEvento = 0, $idCliente = 0) {
@@ -37,6 +38,9 @@ class BoletaDAO {
                 FROM evento e
                 LEFT JOIN boleta b ON b.Evento_idEvento = e.idEvento
                 GROUP BY e.nombre";
+    }
+    public function consultarBoleta($idCliente) {
+        return "SELECT idBoleta, nombre_usuario, Evento_idEvento, Cliente_idCliente FROM boleta WHERE Cliente_idCliente = $idCliente";
     }
     
 }

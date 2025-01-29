@@ -16,6 +16,9 @@
 				<li class="nav-item">
 					<a class="nav-link" href='?pid=<?php echo base64_encode("presentacion/cliente/compras.php")?>'>Compras</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" href='?pid=<?php echo base64_encode("presentacion/cliente/boletas.php")?>'>Boletas</a>
+				</li>
 			</ul>
 
 			<!-- Ícono del carrito de compras -->

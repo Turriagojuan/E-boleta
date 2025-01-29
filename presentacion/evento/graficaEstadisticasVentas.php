@@ -16,46 +16,33 @@ include ("presentacion/menuProveedor.php");
                     <h4>Estadísticas de Ventas de Boletas</h4>
                 </div>
                 <div class="card-body">
-                    <canvas id="ventasChart"></canvas>
+                    <div id='pieVentasPorEvento'></div>
+                    <hr>
+                    <div id='columnVentasPorEvento'></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Reemplazar estos datos con los obtenidos del backend
-        const eventos = <?php echo json_encode(array_column($ventasPorEvento, 'evento')); ?>;
-        const totalBoletas = <?php echo json_encode(array_column($ventasPorEvento, 'total_boletas')); ?>;
-
-        const ctx = document.getElementById('ventasChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: eventos,
-                datasets: [{
-                    label: 'Boletas Vendidas',
-                    data: totalBoletas,
-                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top'
-                    }
-                }
-            }
-        });
-    });
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Evento', 'Cantidad de Ventas'],
+    <?php 
+    foreach ($ventasPorEvento as $venta){
+        echo "['" . $venta[0] . "', " . $venta[1] . "],";
+    }
+    ?>
+    ]);
+    var options = {
+      title: 'Ventas de Boletas por Evento'
+    };
+    var chartPie = new google.visualization.PieChart(document.getElementById('pieVentasPorEvento'));
+    chartPie.draw(data, options);
+    var chartColumn = new google.visualization.ColumnChart(document.getElementById('columnVentasPorEvento'));
+    chartColumn.draw(data, options);
+  }
 </script>

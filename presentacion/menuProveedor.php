@@ -20,7 +20,6 @@ $proveedor -> consultar();
 					<ul class="dropdown-menu">
                         <li><a class='dropdown-item' href='?pid=<?php echo base64_encode("presentacion/evento/agregarEvento.php")?>'>Nuevo Evento</a></li>
                         <li><a class='dropdown-item' href='?pid=<?php echo base64_encode("presentacion/evento/buscarEvento.php")?>'>Buscar Eventos</a></li>
-                        <li><a class='dropdown-item' href='?pid=<?php echo base64_encode("presentacion/evento/reporteEventos.php")?>'>Reporte de Eventos</a></li>
 					</ul></li>
 				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
 					href="#" role="button" data-bs-toggle="dropdown"
